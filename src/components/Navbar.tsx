@@ -101,6 +101,7 @@ function NavItem({ item }: NavItemProps) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -108,6 +109,13 @@ export default function Navbar() {
     handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   // Ferme le menu mobile à chaque changement de page
@@ -227,36 +235,51 @@ export default function Navbar() {
         </Link>
 
         {/* Menu Desktop */}
-        <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-          {navItems.map((item) => <NavItem key={item.href} item={item} />)}
-        </div>
+        {!isMobile && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            {navItems.map((item) => <NavItem key={item.href} item={item} />)}
+          </div>
+        )}
 
-        {/* Droite : Don + Burger */}
+        {/* Droite : Don (desktop) + Burger (mobile) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          <Link
-            href="/don"
-            className="don-btn"
-            style={{
-              fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
-              color: '#0A3D2E', textDecoration: 'none', padding: '9px 18px',
-              backgroundColor: '#C9A84C', borderRadius: '6px', whiteSpace: 'nowrap', transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#B8973B'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-            onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.transform = 'translateY(0)' }}
-          >
-            Faire un don
-          </Link>
+          {!isMobile && (
+            <Link
+              href="/don"
+              style={{
+                fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
+                color: '#0A3D2E', textDecoration: 'none', padding: '9px 18px',
+                backgroundColor: '#C9A84C', borderRadius: '6px', whiteSpace: 'nowrap', transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#B8973B'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.transform = 'translateY(0)' }}
+            >
+              Faire un don
+            </Link>
+          )}
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="burger-btn"
-            aria-label="Menu"
-            style={{ display: 'none', background: 'none', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '6px', cursor: 'pointer', padding: '8px 10px', flexDirection: 'column', gap: '5px', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
-            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
-          </button>
+          {isMobile && (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
+              style={{
+                background: 'none',
+                border: '1px solid rgba(255,255,255,0.25)',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                padding: '8px 10px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '5px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
+              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
+            </button>
+          )}
         </div>
       </div>
 

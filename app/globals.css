@@ -36,16 +36,4 @@ body {
   .nav-inner {
     padding: 0 16px !important;
   }
-  .nav-logo-sub {
-    display: none !important;
-  }
-  .desktop-menu {
-    display: none !important;
-  }
-  .burger-btn {
-    display: flex !important;
-  }
-  .don-btn {
-    display: none !important;
-  }
 }
