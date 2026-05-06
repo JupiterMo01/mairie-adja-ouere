@@ -120,12 +120,10 @@ export default function HeroSlider() {
       </div>
 
       {/* Numéro slide */}
-      {!isMobile && (
-        <div style={{ position: 'absolute', bottom: '28px', right: '40px', zIndex: 10, fontFamily: 'Cormorant Garamond, serif', color: 'rgba(255,255,255,0.5)', fontSize: '14px' }}>
-          <span style={{ color: '#C9A84C', fontSize: '24px', fontWeight: '700' }}>{String(current + 1).padStart(2, '0')}</span>
-          /{String(slides.length).padStart(2, '0')}
-        </div>
-      )}
+      <div style={{ position: 'absolute', bottom: '28px', right: isMobile ? '16px' : '40px', zIndex: 10, fontFamily: 'Cormorant Garamond, serif', color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>
+        <span style={{ color: '#C9A84C', fontSize: isMobile ? '18px' : '24px', fontWeight: '700' }}>{String(current + 1).padStart(2, '0')}</span>
+        /{String(slides.length).padStart(2, '0')}
+      </div>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
