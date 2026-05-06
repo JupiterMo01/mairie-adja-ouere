@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-export default function SeDesabonner() {
+function SeDesabonnerContent() {
   const searchParams = useSearchParams()
   const email = searchParams.get('email') || ''
   const token = searchParams.get('token') || ''
@@ -62,7 +62,7 @@ export default function SeDesabonner() {
                 Vous avez ete desabonne avec succes
               </h1>
               <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '15px', lineHeight: '1.7', color: '#4A4A4A', margin: '0 0 32px 0' }}>
-                L'adresse <strong style={{ color: '#0A3D2E' }}>{email}</strong> a bien ete retiree de notre liste de diffusion. Vous ne recevrez plus nos emails.
+                L&apos;adresse <strong style={{ color: '#0A3D2E' }}>{email}</strong> a bien ete retiree de notre liste de diffusion. Vous ne recevrez plus nos emails.
               </p>
               <a href="/" style={{ textDecoration: 'none' }}>
                 <button
@@ -70,7 +70,7 @@ export default function SeDesabonner() {
                   onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#156840' }}
                   onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#0A3D2E' }}
                 >
-                  Retour a l'accueil
+                  Retour a l&apos;accueil
                 </button>
               </a>
             </>
@@ -90,7 +90,7 @@ export default function SeDesabonner() {
                 Lien invalide ou expire
               </h1>
               <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '15px', lineHeight: '1.7', color: '#4A4A4A', margin: '0 0 24px 0' }}>
-                Ce lien de desabonnement n'est pas valide ou a deja ete utilise. Si vous souhaitez vous desabonner, contactez-nous directement.
+                Ce lien de desabonnement n&apos;est pas valide ou a deja ete utilise. Si vous souhaitez vous desabonner, contactez-nous directement.
               </p>
               <div style={{ padding: '16px 20px', backgroundColor: 'rgba(10,61,46,0.05)', borderRadius: '10px', border: '1px solid rgba(10,61,46,0.12)', marginBottom: '28px' }}>
                 <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#0A3D2E', margin: 0, fontWeight: '600' }}>
@@ -103,7 +103,7 @@ export default function SeDesabonner() {
                   onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.color = '#FFFFFF' }}
                   onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#0A3D2E' }}
                 >
-                  Retour a l'accueil
+                  Retour a l&apos;accueil
                 </button>
               </a>
             </>
@@ -112,9 +112,21 @@ export default function SeDesabonner() {
         </div>
 
         <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#9A9A9A', textAlign: 'center', marginTop: '20px' }}>
-          Commune d'Adja-Ouere — Departement du Plateau, Benin
+          Commune d&apos;Adja-Ouere — Departement du Plateau, Benin
         </p>
       </div>
     </main>
+  )
+}
+
+export default function SeDesabonner() {
+  return (
+    <Suspense fallback={
+      <main style={{ backgroundColor: '#F8F6F1', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ fontSize: '28px' }}>⏳</div>
+      </main>
+    }>
+      <SeDesabonnerContent />
+    </Suspense>
   )
 }
