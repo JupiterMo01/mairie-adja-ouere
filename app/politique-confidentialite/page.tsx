@@ -348,7 +348,7 @@ export default function PolitiqueConfidentialitePage() {
                   {section.titre}
                 </h2>
 
-                {section.contenu.map((bloc, i) => {
+                {section.contenu.map((bloc: any, i: number) => {
                   if (bloc.type === 'texte') {
                     return <p key={i} style={textStyle}>{bloc.valeur}</p>
                   }

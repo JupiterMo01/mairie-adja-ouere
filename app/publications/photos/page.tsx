@@ -264,7 +264,6 @@ function Lightbox({
           {photos.map((p, i) => (
             <div
               key={p.id}
-              onClick={e => { e.stopPropagation(); }}
               style={{
                 width: '64px', height: '48px', flexShrink: 0,
                 borderRadius: '6px', overflow: 'hidden', cursor: 'pointer',
