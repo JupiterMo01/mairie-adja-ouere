@@ -48,27 +48,27 @@ function DateBadge({ dateDebut, dateFin }: { dateDebut: string; dateFin: string 
   return (
     <div style={{ flexShrink: 0 }}>
       {memeJour ? (
-        <div style={{ width: '64px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ width: '60px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
           <div style={{ backgroundColor: '#0A3D2E', padding: '6px', textAlign: 'center', fontFamily: 'Outfit, sans-serif', fontSize: '10px', fontWeight: '600', color: '#C9A84C', letterSpacing: '1px', textTransform: 'uppercase' }}>{debut.mois}</div>
           <div style={{ backgroundColor: '#FFFFFF', padding: '8px 4px', textAlign: 'center' }}>
-            <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '28px', fontWeight: '700', color: '#0A3D2E', lineHeight: 1 }}>{debut.numero}</div>
+            <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '26px', fontWeight: '700', color: '#0A3D2E', lineHeight: 1 }}>{debut.numero}</div>
             <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: '#9A9A9A', marginTop: '2px' }}>{debut.jour}</div>
           </div>
         </div>
       ) : (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: '56px', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <div style={{ width: '52px', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <div style={{ backgroundColor: '#0A3D2E', padding: '5px', textAlign: 'center', fontFamily: 'Outfit, sans-serif', fontSize: '9px', fontWeight: '600', color: '#C9A84C', letterSpacing: '1px', textTransform: 'uppercase' }}>{debut.mois}</div>
             <div style={{ backgroundColor: '#FFFFFF', padding: '6px 4px', textAlign: 'center' }}>
-              <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: '700', color: '#0A3D2E', lineHeight: 1 }}>{debut.numero}</div>
+              <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: '700', color: '#0A3D2E', lineHeight: 1 }}>{debut.numero}</div>
               <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '9px', color: '#9A9A9A', marginTop: '2px' }}>{debut.jour}</div>
             </div>
           </div>
-          <div style={{ color: '#C9A84C', fontSize: '16px', fontWeight: '700' }}>{'>'}</div>
-          <div style={{ width: '56px', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', opacity: 0.85 }}>
+          <div style={{ color: '#C9A84C', fontSize: '14px', fontWeight: '700' }}>›</div>
+          <div style={{ width: '52px', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', opacity: 0.85 }}>
             <div style={{ backgroundColor: '#156840', padding: '5px', textAlign: 'center', fontFamily: 'Outfit, sans-serif', fontSize: '9px', fontWeight: '600', color: '#C9A84C', letterSpacing: '1px', textTransform: 'uppercase' }}>{fin.mois}</div>
             <div style={{ backgroundColor: '#FFFFFF', padding: '6px 4px', textAlign: 'center' }}>
-              <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: '700', color: '#156840', lineHeight: 1 }}>{fin.numero}</div>
+              <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: '700', color: '#156840', lineHeight: 1 }}>{fin.numero}</div>
               <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '9px', color: '#9A9A9A', marginTop: '2px' }}>{fin.jour}</div>
             </div>
           </div>
@@ -91,12 +91,12 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
   }, [onClose])
 
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 1000, backgroundColor: 'rgba(10,61,46,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, backgroundColor: 'rgba(10,61,46,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
       <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', maxWidth: '620px', width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 32px 80px rgba(0,0,0,0.2)' }}>
-        <div style={{ backgroundColor: '#0A3D2E', borderRadius: '20px 20px 0 0', padding: '28px 32px', position: 'relative' }}>
+        <div style={{ backgroundColor: '#0A3D2E', borderRadius: '20px 20px 0 0', padding: '24px', position: 'relative' }}>
           <button onClick={onClose} style={{ position: 'absolute', top: '16px', right: '16px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', border: 'none', cursor: 'pointer', color: '#FFFFFF', fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
           <span style={{ backgroundColor: config.color, color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', padding: '4px 12px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.8px', display: 'inline-block', marginBottom: '14px' }}>{config.label}</span>
-          <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '28px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: '1.2', paddingRight: '40px' }}>{evt.titre}</h2>
+          <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: '1.2', paddingRight: '40px' }}>{evt.titre}</h2>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '10px', padding: '8px 14px' }}>
             <span style={{ fontSize: '14px' }}>📅</span>
             <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#C9A84C', fontWeight: '600' }}>
@@ -106,7 +106,7 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
             </span>
           </div>
         </div>
-        <div style={{ padding: '32px' }}>
+        <div style={{ padding: '28px 24px' }}>
           <div style={{ marginBottom: '24px' }}>
             <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '10px' }}>À propos</div>
             <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '15px', lineHeight: '1.8', color: '#4A4A4A', margin: 0 }}>{evt.description_complete || evt.description}</p>
@@ -134,25 +134,44 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
   )
 }
 
-function EventCard({ evt, onOpen, animDelay }: { evt: Evenement; onOpen: () => void; animDelay: number }) {
+function EventCard({ evt, onOpen, animDelay, isMobile }: { evt: Evenement; onOpen: () => void; animDelay: number; isMobile: boolean }) {
   const [hovered, setHovered] = React.useState(false)
   const debut = getDateInfo(evt.date_debut); const fin = getDateInfo(evt.date_fin)
   const memeJour = isSameDay(evt.date_debut, evt.date_fin)
   const config = categorieConfig[evt.categorie] || categorieConfig.autre
 
+  const dateTexte = memeJour
+    ? `${debut.heure} – ${fin.heure}`
+    : `${debut.numero} ${debut.mois} – ${fin.numero} ${fin.mois} ${fin.annee}`
+
   return (
-    <div onClick={onOpen} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      style={{ display: 'flex', gap: '20px', backgroundColor: hovered ? '#FFFFFF' : '#F8F6F1', borderRadius: '16px', padding: '24px', border: hovered ? '1px solid #C9A84C' : '1px solid #E8E4DC', boxShadow: hovered ? '0 8px 32px rgba(10,61,46,0.10)' : 'none', transition: 'all 0.3s ease', alignItems: 'flex-start', cursor: 'pointer', animation: 'fadeSlide 0.4s ease both', animationDelay: `${animDelay}s` }}
+    <div
+      onClick={onOpen}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? '14px' : '20px',
+        backgroundColor: hovered ? '#FFFFFF' : '#F8F6F1',
+        borderRadius: '16px',
+        padding: isMobile ? '16px' : '24px',
+        border: hovered ? '1px solid #C9A84C' : '1px solid #E8E4DC',
+        boxShadow: hovered ? '0 8px 32px rgba(10,61,46,0.10)' : 'none',
+        transition: 'all 0.3s ease',
+        alignItems: isMobile ? 'flex-start' : 'flex-start',
+        cursor: 'pointer',
+        animation: 'fadeSlide 0.4s ease both',
+        animationDelay: `${animDelay}s`,
+      }}
     >
       <DateBadge dateDebut={evt.date_debut} dateFin={evt.date_fin} />
-      <div style={{ flex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
-          <span style={{ backgroundColor: config.color, color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '10px', fontWeight: '600', padding: '3px 10px', borderRadius: '10px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>{config.label}</span>
-          <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#6A6A6A', fontWeight: '500' }}>
-            {memeJour ? `${debut.heure} - ${fin.heure}` : `Du ${debut.numero} ${debut.moisLong} au ${fin.numero} ${fin.moisLong} ${fin.annee} | ${debut.heure} - ${fin.heure}`}
-          </span>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+          <span style={{ backgroundColor: config.color, color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '10px', fontWeight: '600', padding: '3px 10px', borderRadius: '10px', letterSpacing: '0.5px', textTransform: 'uppercase', flexShrink: 0 }}>{config.label}</span>
+          <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#6A6A6A', fontWeight: '500' }}>{dateTexte}</span>
         </div>
-        <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: '700', color: '#0A3D2E', margin: '0 0 8px 0', lineHeight: '1.3' }}>{evt.titre}</h3>
+        <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: isMobile ? '18px' : '20px', fontWeight: '700', color: '#0A3D2E', margin: '0 0 8px 0', lineHeight: '1.3' }}>{evt.titre}</h3>
         <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#6A6A6A', margin: '0 0 12px 0', lineHeight: '1.6' }}>{evt.description}</p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
           {evt.lieu && <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#9A9A9A' }}>📍 {evt.lieu}</div>}
@@ -165,6 +184,14 @@ function EventCard({ evt, onOpen, animDelay }: { evt: Evenement; onOpen: () => v
 
 export default function SectionEvenements() {
   const [modalEvt, setModalEvt] = React.useState<Evenement | null>(null)
+  const [isMobile, setIsMobile] = React.useState(false)
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   return (
     <section style={{ backgroundColor: '#F8F6F1', padding: '80px 40px' }}>
@@ -178,7 +205,9 @@ export default function SectionEvenements() {
             </div>
             <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(28px, 3vw, 48px)', fontWeight: '700', color: '#0A3D2E', margin: 0, lineHeight: '1.2' }}>Événements à venir</h2>
           </div>
-          <Link href="/publications/evenements" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#0A3D2E', color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'all 0.2s ease' }}
+          <Link
+            href="/publications/evenements"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#0A3D2E', color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', whiteSpace: 'nowrap', transition: 'all 0.2s ease' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#156840'; e.currentTarget.style.transform = 'translateY(-2px)' }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.transform = 'translateY(0)' }}
           >Voir tous les événements →</Link>
@@ -191,9 +220,9 @@ export default function SectionEvenements() {
             <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '15px', color: '#9A9A9A', margin: 0 }}>Les prochains événements seront affichés ici.</p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', gap: '16px' }}>
             {evenements.map((evt, i) => (
-              <EventCard key={evt.id} evt={evt} onOpen={() => setModalEvt(evt)} animDelay={i * 0.08} />
+              <EventCard key={evt.id} evt={evt} onOpen={() => setModalEvt(evt)} animDelay={i * 0.08} isMobile={isMobile} />
             ))}
           </div>
         )}
