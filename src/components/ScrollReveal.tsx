@@ -34,6 +34,9 @@ export default function ScrollReveal({ children, delay = 0, direction = 'up', di
         opacity: inView ? 1 : 0,
         transform: inView ? 'none' : initialTransform,
         transition: `opacity 0.75s ease ${delay}s, transform 0.75s ease ${delay}s`,
+        isolation: 'isolate',
+        position: 'relative',
+        zIndex: 0,
       }}
     >
       {children}

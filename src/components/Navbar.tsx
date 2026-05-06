@@ -203,12 +203,16 @@ export default function Navbar() {
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1000,
-      backgroundColor: 'rgba(10, 61, 46, 0.97)',
-      backdropFilter: 'blur(10px)',
+      zIndex: 9999,
+      backgroundColor: 'rgba(10, 61, 46, 0.98)',
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
       borderBottom: '1px solid rgba(201, 168, 76, 0.3)',
       transition: 'padding 0.3s ease',
       padding: scrolled ? '10px 0' : '16px 0',
+      transform: 'translateZ(0)',
+      WebkitTransform: 'translateZ(0)',
+      willChange: 'transform',
     }}>
       <div
         className="nav-inner"
