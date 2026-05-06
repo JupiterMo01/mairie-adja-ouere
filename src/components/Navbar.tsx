@@ -178,7 +178,7 @@ export default function Navbar() {
     { label: 'Sites touristiques', href: '/presentation/sites-touristiques', indent: true },
     { label: 'Nos marchés', href: '/presentation/marches', indent: true },
     { label: 'Gares routières', href: '/presentation/gares', indent: true },
-    { label: 'Publications', href: '/publications/actualites', indent: false },
+    { label: 'Publications', href: '/publications', indent: false },
     { label: 'Actualités', href: '/publications/actualites', indent: true },
     { label: 'Projets', href: '/publications/projets', indent: true },
     { label: 'Événements', href: '/publications/evenements', indent: true },
