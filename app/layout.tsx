@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Navbar from '@/src/components/Navbar'
 import Footer from '@/src/components/Footer'
 import SectionNewsletter from '@/src/components/SectionNewsletter'
+import CookieBanner from '@/src/components/CookieBanner'
 
 export const metadata: Metadata = {
   title: "Commune d'Adja-Ouère",
@@ -25,6 +26,7 @@ export default function RootLayout({
         {children}
         <SectionNewsletter />
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   )

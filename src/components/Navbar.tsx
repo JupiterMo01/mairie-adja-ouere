@@ -221,12 +221,11 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: '40px', height: '40px', backgroundColor: '#C9A84C',
-              borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'Cormorant Garamond, serif', fontWeight: '700', fontSize: '17px', color: '#0A3D2E',
-              flexShrink: 0,
-            }}>AO</div>
+            <img
+              src="/logo.jpeg"
+              alt="Commune d'Adja-Ouère"
+              style={{ width: '44px', height: '44px', objectFit: 'contain', flexShrink: 0 }}
+            />
             <div>
               <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '15px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '0.3px', lineHeight: '1.2' }}>
                 Commune d&apos;Adja-Ouère

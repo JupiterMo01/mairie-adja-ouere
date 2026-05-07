@@ -91,8 +91,9 @@ export default function Footer() {
   ]
 
   const mentions = [
-    { label: 'Mentions legales', href: '/mentions-legales' },
-    { label: 'Politique de confidentialite', href: '/politique-confidentialite' },
+    { label: 'Mentions légales', href: '/mentions-legales' },
+    { label: 'Politique de confidentialité', href: '/politique-confidentialite' },
+    { label: 'Politique des cookies', href: '/politique-cookies' },
   ]
 
   const sociaux: Social[] = [
@@ -188,22 +189,11 @@ export default function Footer() {
               gap: '12px',
               marginBottom: '20px',
             }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '10px',
-                backgroundColor: '#C9A84C',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '18px',
-                fontWeight: '700',
-                color: '#0A3D2E',
-                flexShrink: 0,
-              }}>
-                AO
-              </div>
+              <img
+                src="/logo.jpeg"
+                alt="Commune d'Adja-Ouère"
+                style={{ width: '52px', height: '52px', objectFit: 'contain', flexShrink: 0 }}
+              />
               <div>
                 <div style={{
                   fontFamily: 'Cormorant Garamond, serif',
