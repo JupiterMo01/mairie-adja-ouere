@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { projets as tousLesprojets } from '@/app/publications/projets/page'
 
 const projets = tousLesprojets
@@ -52,8 +53,8 @@ function Modal({ projet, onClose }: { projet: Projet; onClose: () => void }) {
     }
   }, [onClose])
 
-  return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 1000, backgroundColor: 'rgba(10,61,46,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+  return createPortal(
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, backgroundColor: 'rgba(10,61,46,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', maxWidth: '640px', width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 32px 80px rgba(0,0,0,0.2)' }}>
         <div style={{ position: 'relative', height: '200px', overflow: 'hidden', borderRadius: '20px 20px 0 0' }}>
           <img src={projet.image} alt={projet.titre} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -101,7 +102,8 @@ function Modal({ projet, onClose }: { projet: Projet; onClose: () => void }) {
           <button onClick={onClose} style={{ width: '100%', marginTop: '24px', padding: '13px', borderRadius: '10px', backgroundColor: '#F8F6F1', border: '1px solid #E8E4DC', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', color: '#0A3D2E', cursor: 'pointer' }}>Fermer</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

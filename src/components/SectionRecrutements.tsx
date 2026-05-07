@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { recrutements as tousRecrutements } from '@/app/opportunites/recrutements/page'
 
 const recrutements = tousRecrutements
@@ -46,8 +47,8 @@ function PopupDetails({ recrutement, onClose }: { recrutement: Recrutement; onCl
     }
   }, [onClose])
 
-  return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+  return createPortal(
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
       <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', width: '100%', maxWidth: '680px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 80px rgba(0,0,0,0.3)' }}>
         <div style={{ backgroundColor: '#0A3D2E', padding: '28px 32px', position: 'relative' }}>
           <button onClick={onClose} style={{ position: 'absolute', top: '16px', right: '16px', background: 'rgba(255,255,255,0.15)', border: 'none', color: '#FFFFFF', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
@@ -115,7 +116,8 @@ function PopupDetails({ recrutement, onClose }: { recrutement: Recrutement; onCl
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

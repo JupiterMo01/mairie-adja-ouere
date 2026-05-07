@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { evenements as tousEvenements } from '@/app/publications/evenements/page'
 
 const today = new Date()
@@ -103,7 +104,7 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
     }
   }, [onClose])
 
-  return (
+  return createPortal(
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, backgroundColor: 'rgba(10,61,46,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
       <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', maxWidth: '620px', width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 32px 80px rgba(0,0,0,0.2)' }}>
         <div style={{ backgroundColor: '#0A3D2E', borderRadius: '20px 20px 0 0', padding: '24px', position: 'relative' }}>
@@ -143,7 +144,8 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
           <button onClick={onClose} style={{ width: '100%', marginTop: '24px', padding: '13px', borderRadius: '10px', backgroundColor: '#F8F6F1', border: '1px solid #E8E4DC', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', color: '#0A3D2E', cursor: 'pointer' }}>Fermer</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

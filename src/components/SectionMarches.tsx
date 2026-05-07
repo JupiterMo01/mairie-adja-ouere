@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { marches as tousMarches } from '@/app/opportunites/marches/page'
 
 const marches = tousMarches
@@ -83,8 +84,8 @@ function ModalFormulaireDAO({ marche, onClose }: { marche: Marche; onClose: () =
   const inputStyle = (error?: string): React.CSSProperties => ({ width: '100%', padding: '10px 12px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: `1px solid ${error ? '#D32F2F' : '#E8E4DC'}`, borderRadius: '6px', outline: 'none', backgroundColor: '#FAFAF8', color: '#1C1C1C', boxSizing: 'border-box', transition: 'border-color 0.15s ease' })
   const labelStyle: React.CSSProperties = { display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#4A4A4A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '5px' }
 
-  return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+  return createPortal(
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', overflow: 'hidden', maxWidth: '600px', width: '100%', boxShadow: '0 24px 64px rgba(0,0,0,0.25)', maxHeight: '92vh', overflowY: 'auto' }}>
         <div style={{ backgroundColor: '#0A3D2E', padding: '20px 24px', position: 'relative' }}>
           <button onClick={onClose} style={{ position: 'absolute', top: '12px', right: '12px', width: '30px', height: '30px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', border: 'none', color: '#FFFFFF', fontSize: '15px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
@@ -167,7 +168,8 @@ function ModalFormulaireDAO({ marche, onClose }: { marche: Marche; onClose: () =
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
@@ -232,8 +234,8 @@ function MarcheCard({ marche, animDelay }: { marche: Marche; animDelay: number }
         </div>
       </div>
 
-      {popup && (
-        <div onClick={() => setPopup(false)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      {popup && createPortal(
+        <div onClick={() => setPopup(false)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
           <div onClick={e => e.stopPropagation()} style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', overflow: 'hidden', maxWidth: '700px', width: '100%', boxShadow: '0 24px 64px rgba(0,0,0,0.2)', maxHeight: '90vh', overflowY: 'auto' }}>
             <div style={{ backgroundColor: '#0A3D2E', padding: '16px 24px', position: 'relative' }}>
               <button onClick={() => setPopup(false)} style={{ position: 'absolute', top: '12px', right: '12px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', border: 'none', color: '#FFFFFF', fontSize: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>x</button>
@@ -286,7 +288,8 @@ function MarcheCard({ marche, animDelay }: { marche: Marche; animDelay: number }
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {formDAO && <ModalFormulaireDAO marche={marche} onClose={() => setFormDAO(false)} />}
