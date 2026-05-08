@@ -22,48 +22,15 @@ const categories = [
   },
 ]
 
-type Chiffre = { val: string; label: string; icon: string }
-
-const DEFAULT_CHIFFRES: Chiffre[] = [
-  { val: '—', label: 'Marchés actifs', icon: '📋' },
-  { val: '—', label: 'Postes ouverts', icon: '👔' },
-  { val: '—', label: 'Marchés attribués', icon: '✅' },
-  { val: '28', label: 'Agents communaux', icon: '👥' },
-]
-
-async function fetchCount(strapi: string, col: string, filters = ''): Promise<number> {
-  try {
-    const r = await fetch(`${strapi}/api/${col}?pagination[pageSize]=0${filters}`, { signal: AbortSignal.timeout(3000) })
-    const d = await r.json()
-    return d?.meta?.pagination?.total ?? 0
-  } catch { return 0 }
-}
 
 export default function OpportunitesPage() {
   const [isMobile, setIsMobile] = React.useState(false)
-  const [chiffres, setChiffres] = React.useState<Chiffre[]>(DEFAULT_CHIFFRES)
 
   React.useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
-  }, [])
-
-  React.useEffect(() => {
-    const strapi = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'
-    Promise.all([
-      fetchCount(strapi, 'marches-publics', '&filters[statut][$eq]=actif'),
-      fetchCount(strapi, 'recrutements', '&filters[statut][$eq]=ouvert'),
-      fetchCount(strapi, 'marches-publics', '&filters[statut][$eq]=attribue'),
-    ]).then(([actifs, postes, attribues]) => {
-      setChiffres([
-        { val: actifs > 0 ? String(actifs) : DEFAULT_CHIFFRES[0].val, label: 'Marchés actifs', icon: '📋' },
-        { val: postes > 0 ? String(postes) : DEFAULT_CHIFFRES[1].val, label: 'Postes ouverts', icon: '👔' },
-        { val: attribues > 0 ? String(attribues) : DEFAULT_CHIFFRES[2].val, label: 'Marchés attribués', icon: '✅' },
-        { val: '28', label: 'Agents communaux', icon: '👥' },
-      ])
-    })
   }, [])
 
   return (
@@ -86,23 +53,6 @@ export default function OpportunitesPage() {
           <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: '1.7', color: 'rgba(255,255,255,0.75)', margin: 0, maxWidth: '680px' }}>
             Marchés publics, appels d'offres et recrutements — toutes les opportunités offertes par la Commune d'Adja-Ouèrè aux entreprises et aux citoyens.
           </p>
-        </div>
-      </section>
-
-      {/* Chiffres */}
-      <section style={{ backgroundColor: '#FFFFFF', padding: isMobile ? '40px 24px' : '60px 40px', borderBottom: '1px solid #E8E4DC' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '24px' }}>
-            {chiffres.map(c => (
-              <div key={c.label} style={{ textAlign: 'center', padding: '28px 16px', backgroundColor: '#F8F6F1', borderRadius: '16px', border: '1px solid #E8E4DC' }}>
-                <div style={{ fontSize: '28px', marginBottom: '8px' }}>{c.icon}</div>
-                <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: '700', color: '#0A3D2E', lineHeight: '1' }}>
-                  {c.val}
-                </div>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#6A6A6A', marginTop: '6px' }}>{c.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -147,8 +97,8 @@ export default function OpportunitesPage() {
             {[
               { num: '01', titre: 'Consulter', desc: 'Parcourez les avis de marchés et offres d\'emploi publiés sur cette page.' },
               { num: '02', titre: 'Préparer', desc: 'Rassemblez les documents requis : statuts, attestations fiscales, CV, lettres de motivation...' },
-              { num: '03', titre: 'Soumettre', desc: 'Déposez votre dossier à la mairie ou utilisez notre formulaire en ligne.' },
-              { num: '04', titre: 'Suivre', desc: 'Suivez l\'avancement de votre candidature via notre outil de suivi en ligne.' },
+              { num: '03', titre: 'Soumettre', desc: 'Déposez votre dossier sous pli fermé au secrétariat de la mairie avant la date limite indiquée.' },
+              { num: '04', titre: 'Être contacté', desc: 'Les candidats retenus seront contactés directement par la mairie par téléphone ou par courrier officiel.' },
             ].map(step => (
               <div key={step.num} style={{ padding: '28px 24px', borderRadius: '16px', border: '1px solid rgba(201,168,76,0.2)', backgroundColor: 'rgba(255,255,255,0.04)' }}>
                 <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '48px', fontWeight: '700', color: '#C9A84C', lineHeight: '1', marginBottom: '12px', opacity: 0.7 }}>
