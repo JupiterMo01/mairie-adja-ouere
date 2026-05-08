@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { createPortal } from 'react-dom'
 
 // ─── Données marchés ──────────────────────────────────────────────────────────
 export const marches = [
@@ -273,13 +274,33 @@ function ModalFormulaireDAO({ marche, onClose }: { marche: Marche; onClose: () =
     marginBottom: '5px',
   }
 
-  return (
+  React.useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleKey)
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
+    }
+  }, [onClose])
+
+  return createPortal(
     <div
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0,
         backgroundColor: 'rgba(0,0,0,0.55)',
-        zIndex: 2000,
+        zIndex: 10000,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '20px',
       }}
@@ -481,11 +502,115 @@ function ModalFormulaireDAO({ marche, onClose }: { marche: Marche; onClose: () =
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
 // ─── Carte marché ─────────────────────────────────────────────────────────────
+function MarchePopup({ marche, statut, estOuvert, joursRestants, urgent, onClose, onOpenDAO }: {
+  marche: Marche; statut: { label: string; bg: string; color: string; badgeBg: string };
+  estOuvert: boolean; joursRestants: number; urgent: boolean;
+  onClose: () => void; onOpenDAO: () => void;
+}) {
+  React.useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handleKey)
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', overflow: 'hidden', maxWidth: '700px', width: '100%', boxShadow: '0 24px 64px rgba(0,0,0,0.2)', maxHeight: '90vh', overflowY: 'auto' }}
+      >
+        <div style={{ backgroundColor: '#0A3D2E', padding: '16px 24px', position: 'relative' }}>
+          <button
+            onClick={onClose}
+            style={{ position: 'absolute', top: '12px', right: '12px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', border: 'none', color: '#FFFFFF', fontSize: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >×</button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+            <span style={{ backgroundColor: statut.bg, color: statut.color, fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', padding: '3px 12px', borderRadius: '20px' }}>{statut.label}</span>
+            <span style={{ backgroundColor: 'rgba(201,168,76,0.2)', color: '#C9A84C', fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', padding: '3px 12px', borderRadius: '20px', textTransform: 'uppercase' }}>
+              {typeConfig[marche.type_marche]?.label || 'Autre'}
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', paddingRight: '44px' }}>
+            <div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Autorite contractante</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', color: '#FFFFFF' }}>{marche.autorite}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Date limite de depot</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', color: '#C9A84C' }}>{formatDateLong(marche.date_limite)}</div>
+            </div>
+            {estOuvert && (
+              <div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Delai</div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700', color: urgent ? '#F44336' : '#4CAF50' }}>{joursRestants} jours</div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div style={{ padding: '24px' }}>
+          <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: '700', color: '#0A3D2E', margin: '0 0 20px 0', lineHeight: '1.3' }}>{marche.titre}</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px', marginBottom: '16px' }}>
+            <div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Date de publication</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{formatDateShort(marche.date_publication)}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Date d'ouverture des offres</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{formatDateLong(marche.date_ouverture_offres)}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Reference</div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{marche.reference}</div>
+            </div>
+          </div>
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Lieu d'acquisition du dossier</div>
+            <div style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#1C1C1C', lineHeight: '1.6' }}>{marche.lieu_dossier}</div>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => { onClose(); onOpenDAO() }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#0A3D2E', color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', padding: '11px 22px', borderRadius: '8px', border: 'none', cursor: 'pointer', transition: 'all 0.2s ease' }}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.color = '#0A3D2E' }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.color = '#FFFFFF' }}
+            >Telecharger</button>
+            <button
+              onClick={() => { if (navigator.share) { navigator.share({ title: marche.titre, url: window.location.href }) } }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: 'transparent', color: '#0A3D2E', fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', padding: '11px 22px', borderRadius: '8px', border: '2px solid #0A3D2E', cursor: 'pointer', transition: 'all 0.2s ease' }}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.color = '#FFFFFF' }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#0A3D2E' }}
+            >Partager</button>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  )
+}
+
 function MarcheCard({ marche }: { marche: Marche }) {
   const [popup, setPopup] = React.useState(false)
   const [formDAO, setFormDAO] = React.useState(false)
@@ -510,7 +635,7 @@ function MarcheCard({ marche }: { marche: Marche }) {
         <div style={{
           backgroundColor: '#0A3D2E',
           padding: '16px 20px',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', flexWrap: 'wrap',
         }}>
           <div>
             <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '4px' }}>
@@ -578,103 +703,13 @@ function MarcheCard({ marche }: { marche: Marche }) {
         </div>
       </div>
 
-      {/* Popup détails */}
       {popup && (
-        <div
-          onClick={() => setPopup(false)}
-          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', overflow: 'hidden', maxWidth: '700px', width: '100%', boxShadow: '0 24px 64px rgba(0,0,0,0.2)', maxHeight: '90vh', overflowY: 'auto' }}
-          >
-            <div style={{ backgroundColor: '#0A3D2E', padding: '16px 24px', position: 'relative' }}>
-              <button
-                onClick={() => setPopup(false)}
-                style={{ position: 'absolute', top: '12px', right: '12px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', border: 'none', color: '#FFFFFF', fontSize: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                ×
-              </button>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                <span style={{ backgroundColor: statut.bg, color: statut.color, fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', padding: '3px 12px', borderRadius: '20px' }}>
-                  {statut.label}
-                </span>
-                <span style={{ backgroundColor: 'rgba(201,168,76,0.2)', color: '#C9A84C', fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', padding: '3px 12px', borderRadius: '20px', textTransform: 'uppercase' }}>
-                  {typeConfig[marche.type_marche]?.label || 'Autre'}
-                </span>
-              </div>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', paddingRight: '44px' }}>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Autorite contractante</div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '600', color: '#FFFFFF' }}>{marche.autorite}</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Date limite de depot</div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', color: '#C9A84C' }}>{formatDateLong(marche.date_limite)}</div>
-                </div>
-                {estOuvert && (
-                  <div>
-                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>Delai</div>
-                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700', color: urgent ? '#F44336' : '#4CAF50' }}>{joursRestants} jours</div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div style={{ padding: '24px' }}>
-              <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: '700', color: '#0A3D2E', margin: '0 0 20px 0', lineHeight: '1.3' }}>
-                {marche.titre}
-              </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px', marginBottom: '16px' }}>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Date de publication</div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{formatDateShort(marche.date_publication)}</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Date d'ouverture des offres</div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{formatDateLong(marche.date_ouverture_offres)}</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Reference</div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#1C1C1C' }}>{marche.reference}</div>
-                </div>
-              </div>
-              <div style={{ marginBottom: '24px' }}>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Lieu d'acquisition du dossier</div>
-                <div style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#1C1C1C', lineHeight: '1.6' }}>{marche.lieu_dossier}</div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
-                <button
-                  onClick={() => { setPopup(false); setFormDAO(true) }}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    backgroundColor: '#0A3D2E', color: '#FFFFFF',
-                    fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
-                    padding: '11px 22px', borderRadius: '8px', border: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.color = '#0A3D2E' }}
-                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.color = '#FFFFFF' }}
-                >
-                  Telecharger
-                </button>
-                <button
-                  onClick={() => { if (navigator.share) { navigator.share({ title: marche.titre, url: window.location.href }) } }}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    backgroundColor: 'transparent', color: '#0A3D2E',
-                    fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
-                    padding: '11px 22px', borderRadius: '8px', border: '2px solid #0A3D2E', cursor: 'pointer', transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#0A3D2E'; e.currentTarget.style.color = '#FFFFFF' }}
-                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#0A3D2E' }}
-                >
-                  Partager
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MarchePopup
+          marche={marche} statut={statut} estOuvert={estOuvert}
+          joursRestants={joursRestants} urgent={urgent}
+          onClose={() => setPopup(false)}
+          onOpenDAO={() => setFormDAO(true)}
+        />
       )}
 
       {formDAO && <ModalFormulaireDAO marche={marche} onClose={() => setFormDAO(false)} />}
@@ -764,9 +799,9 @@ export default function MarchesPublicsPage() {
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
           {/* Ligne 1 : Statut + Année */}
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
             {/* Statut */}
-            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
               <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1px', whiteSpace: 'nowrap' }}>Statut :</span>
               {statutFiltreOptions.map(opt => {
                 const actif = filtreStatut === opt.value
@@ -808,10 +843,10 @@ export default function MarchesPublicsPage() {
             </div>
 
             {/* Séparateur */}
-            <div style={{ width: '1px', height: '20px', backgroundColor: '#E8E4DC', flexShrink: 0 }} />
+            <div style={{ width: '1px', height: '20px', backgroundColor: '#E8E4DC', flexShrink: 0, alignSelf: 'center' }} />
 
             {/* Année */}
-            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
               <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1px', whiteSpace: 'nowrap' }}>Année :</span>
               <button
                 onClick={() => setFiltreAnnee('toutes')}
@@ -874,7 +909,7 @@ export default function MarchesPublicsPage() {
                 <input
                   type="text" placeholder="Rechercher..." value={recherche}
                   onChange={e => setRecherche(e.target.value)}
-                  style={{ padding: '6px 14px 6px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: '200px' }}
+                  style={{ padding: '6px 14px 6px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: isMobile ? '100%' : '200px' }}
                 />
               </div>
             </div>
@@ -892,7 +927,7 @@ export default function MarchesPublicsPage() {
               <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', color: '#9A9A9A' }}>Essayez avec d'autres filtres</div>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
               {marchesFiltres.map(m => <MarcheCard key={m.id} marche={m} />)}
             </div>
           )}

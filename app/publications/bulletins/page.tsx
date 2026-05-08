@@ -300,7 +300,7 @@ export default function BulletinsPage() {
           </div>
 
           {/* Recherche */}
-          <div style={{ position: 'relative', minWidth: '240px' }}>
+          <div style={{ position: 'relative', minWidth: 0, width: '100%', maxWidth: '320px' }}>
             <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '14px', pointerEvents: 'none' }}>🔍</span>
             <input
               type="text"

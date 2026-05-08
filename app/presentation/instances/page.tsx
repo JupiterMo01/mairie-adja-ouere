@@ -438,7 +438,7 @@ export default function InstancesPage() {
       <section style={{ backgroundColor: '#FFFFFF', padding: isMobile ? '60px 24px' : '80px 40px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <SectionTitle label="Gouvernance" title="Conseil de Supervision" />
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
             {supervision.map((m) => (
               <PersonCard key={m.id} nom={m.nom} prenom={m.prenom} role={m.role} telephone={m.telephone} email={m.email} />
             ))}

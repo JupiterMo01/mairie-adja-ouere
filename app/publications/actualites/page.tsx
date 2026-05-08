@@ -261,7 +261,7 @@ export default function ActualitesPage() {
             </div>
 
             {/* Recherche */}
-            <div style={{ position: 'relative', minWidth: '240px' }}>
+            <div style={{ position: 'relative', minWidth: 0, width: '100%', maxWidth: '320px' }}>
               <span style={{
                 position: 'absolute', left: '14px', top: '50%',
                 transform: 'translateY(-50%)', fontSize: '16px', pointerEvents: 'none',

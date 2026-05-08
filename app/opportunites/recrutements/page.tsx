@@ -623,7 +623,7 @@ export default function RecrutementsPage() {
               <input
                 type="text" placeholder="Rechercher..." value={recherche}
                 onChange={e => setRecherche(e.target.value)}
-                style={{ padding: '7px 14px 7px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: '200px' }}
+                style={{ padding: '7px 14px 7px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: isMobile ? '100%' : '200px' }}
               />
             </div>
           </div>

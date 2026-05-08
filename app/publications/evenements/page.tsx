@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { createPortal } from 'react-dom'
 
 export const evenements = [
   {
@@ -191,18 +192,28 @@ function Modal({ evt, onClose }: { evt: typeof evenements[0]; onClose: () => voi
   React.useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handleKey)
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleKey)
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
     }
   }, [onClose])
 
-  return (
+  return createPortal(
     <div
       onClick={onClose}
       style={{
-        position: 'fixed', inset: 0, zIndex: 1000,
+        position: 'fixed', inset: 0, zIndex: 10000,
         backgroundColor: 'rgba(10,61,46,0.6)',
         backdropFilter: 'blur(4px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -289,7 +300,8 @@ function Modal({ evt, onClose }: { evt: typeof evenements[0]; onClose: () => voi
           >Fermer</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
