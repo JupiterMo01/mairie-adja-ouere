@@ -1,136 +1,299 @@
-export const metadata = {
-  title: "Politique des cookies — Commune d'Adja-Ouère",
-  description: "Politique relative à l'utilisation des cookies sur le site officiel de la Commune d'Adja-Ouère.",
-}
+'use client'
+
+import React from 'react'
+import Link from 'next/link'
 
 const sections = [
   {
+    id: 'definition',
     titre: "1. Qu'est-ce qu'un cookie ?",
-    contenu: `Un cookie est un petit fichier texte enregistré sur votre ordinateur, tablette ou téléphone lors de votre visite sur un site web. Il permet au site de mémoriser vos actions et préférences (comme la langue, la taille des caractères et d'autres paramètres d'affichage) pendant une période donnée, de sorte que vous n'ayez pas à les indiquer à nouveau lorsque vous revenez sur le site ou naviguez d'une page à une autre.`,
-  },
-  {
-    titre: "2. Quels cookies utilisons-nous ?",
-    contenu: null,
-    liste: [
+    contenu: [
       {
-        nom: "Cookies strictement nécessaires",
-        description: "Ces cookies sont indispensables au fonctionnement du site. Ils vous permettent de naviguer et d'utiliser ses fonctionnalités, comme l'accès aux zones sécurisées. Sans ces cookies, certaines parties du site ne peuvent pas fonctionner.",
-      },
-      {
-        nom: "Cookies de performance et d'analyse",
-        description: "Ces cookies collectent des informations sur la façon dont les visiteurs utilisent le site (pages visitées, messages d'erreur éventuels, etc.). Ces données sont utilisées uniquement pour améliorer le fonctionnement du site. Toutes les informations collectées sont anonymisées.",
-      },
-      {
-        nom: "Cookies de fonctionnalité",
-        description: "Ces cookies permettent au site de se souvenir des choix que vous faites (comme votre préférence de langue) et de fournir des fonctionnalités améliorées et plus personnelles. Ils peuvent également être utilisés pour fournir des services que vous avez demandés.",
+        type: 'texte',
+        valeur: "Un cookie est un petit fichier texte enregistré sur votre ordinateur, tablette ou téléphone lors de votre visite sur un site web. Il permet au site de mémoriser vos actions et préférences (comme la langue, la taille des caractères et d'autres paramètres d'affichage) pendant une période donnée, de sorte que vous n'ayez pas à les indiquer à nouveau lorsque vous revenez sur le site ou naviguez d'une page à une autre.",
       },
     ],
   },
   {
-    titre: "3. Comment gérer les cookies ?",
-    contenu: `Vous pouvez contrôler et/ou supprimer les cookies comme vous le souhaitez. Vous pouvez supprimer tous les cookies déjà présents sur votre ordinateur et paramétrer la plupart des navigateurs pour qu'ils les bloquent. Toutefois, si vous faites cela, vous devrez peut-être indiquer manuellement certaines préférences chaque fois que vous visiterez le site.
-
-Pour gérer vos préférences de cookies directement depuis notre site, cliquez sur le bouton "Refuser" ou "Accepter" du bandeau qui s'affiche lors de votre première visite. Pour modifier votre choix ultérieurement, supprimez les cookies de votre navigateur pour que le bandeau réapparaisse.`,
-  },
-  {
-    titre: "4. Comment supprimer les cookies dans votre navigateur ?",
-    contenu: null,
-    liste: [
-      { nom: "Google Chrome", description: "Menu > Paramètres > Confidentialité et sécurité > Cookies et autres données des sites" },
-      { nom: "Mozilla Firefox", description: "Menu > Options > Vie privée et sécurité > Cookies et données de sites" },
-      { nom: "Microsoft Edge", description: "Menu > Paramètres > Cookies et autorisations de site" },
-      { nom: "Safari (macOS/iOS)", description: "Préférences > Confidentialité > Cookies et données de sites web" },
+    id: 'types',
+    titre: '2. Quels cookies utilisons-nous ?',
+    contenu: [
+      {
+        type: 'blocs',
+        items: [
+          {
+            icon: '🔒',
+            titre: 'Cookies strictement nécessaires',
+            valeur: "Ces cookies sont indispensables au fonctionnement du site. Ils vous permettent de naviguer et d'utiliser ses fonctionnalités, comme l'accès aux zones sécurisées. Sans ces cookies, certaines parties du site ne peuvent pas fonctionner.",
+          },
+          {
+            icon: '📊',
+            titre: "Cookies de performance et d'analyse",
+            valeur: "Ces cookies collectent des informations sur la façon dont les visiteurs utilisent le site (pages visitées, messages d'erreur éventuels, etc.). Ces données sont utilisées uniquement pour améliorer le fonctionnement du site. Toutes les informations collectées sont anonymisées.",
+          },
+          {
+            icon: '⚙️',
+            titre: 'Cookies de fonctionnalité',
+            valeur: "Ces cookies permettent au site de se souvenir des choix que vous faites (comme votre préférence de langue) et de fournir des fonctionnalités améliorées et plus personnelles. Ils peuvent également être utilisés pour fournir des services que vous avez demandés.",
+          },
+        ],
+      },
     ],
   },
   {
-    titre: "5. Conservation des données",
-    contenu: `Les cookies déposés sur votre terminal ont une durée de vie limitée. Les cookies de session expirent à la fermeture de votre navigateur. Les cookies persistants sont conservés pour une durée maximale de 13 mois conformément aux recommandations de la Commission Nationale Informatique et Libertés (CNIL).`,
+    id: 'gestion',
+    titre: '3. Comment gérer les cookies ?',
+    contenu: [
+      {
+        type: 'texte',
+        valeur: "Vous pouvez contrôler et/ou supprimer les cookies comme vous le souhaitez. Vous pouvez supprimer tous les cookies déjà présents sur votre ordinateur et paramétrer la plupart des navigateurs pour qu'ils les bloquent. Toutefois, si vous faites cela, vous devrez peut-être indiquer manuellement certaines préférences chaque fois que vous visiterez le site.",
+      },
+      {
+        type: 'texte',
+        valeur: 'Pour gérer vos préférences de cookies directement depuis notre site, cliquez sur le bouton "Refuser" ou "Accepter" du bandeau qui s\'affiche lors de votre première visite. Pour modifier votre choix ultérieurement, supprimez les cookies de votre navigateur pour que le bandeau réapparaisse.',
+      },
+    ],
   },
   {
-    titre: "6. Contact",
-    contenu: `Pour toute question relative à notre politique des cookies, vous pouvez nous contacter à l'adresse suivante : contact@mairie-adja-ouere.bj ou vous rendre à la Mairie d'Adja-Ouère, Département du Plateau, République du Bénin.`,
+    id: 'suppression',
+    titre: '4. Comment supprimer les cookies dans votre navigateur ?',
+    contenu: [
+      {
+        type: 'liste',
+        items: [
+          { label: 'Google Chrome', valeur: 'Menu > Paramètres > Confidentialité et sécurité > Cookies et autres données des sites' },
+          { label: 'Mozilla Firefox', valeur: 'Menu > Options > Vie privée et sécurité > Cookies et données de sites' },
+          { label: 'Microsoft Edge', valeur: 'Menu > Paramètres > Cookies et autorisations de site' },
+          { label: 'Safari (macOS/iOS)', valeur: 'Préférences > Confidentialité > Cookies et données de sites web' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'conservation',
+    titre: '5. Conservation des données',
+    contenu: [
+      {
+        type: 'texte',
+        valeur: "Les cookies déposés sur votre terminal ont une durée de vie limitée. Les cookies de session expirent à la fermeture de votre navigateur. Les cookies persistants sont conservés pour une durée maximale de 13 mois conformément aux recommandations de la Commission Nationale Informatique et Libertés (CNIL).",
+      },
+    ],
+  },
+  {
+    id: 'contact',
+    titre: '6. Contact',
+    contenu: [
+      {
+        type: 'texte',
+        valeur: "Pour toute question relative à notre politique des cookies, vous pouvez nous contacter à l'adresse suivante :",
+      },
+      {
+        type: 'liste',
+        items: [
+          { label: 'Email', valeur: 'contact@mairie-adja-ouere.bj' },
+          { label: 'Courrier', valeur: "Mairie d'Adja-Ouèrè, Département du Plateau, République du Bénin" },
+        ],
+      },
+    ],
   },
 ]
 
 export default function PolitiqueCookiesPage() {
+  const [isMobile, setIsMobile] = React.useState(false)
+  const [activeSection, setActiveSection] = React.useState('')
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) })
+      },
+      { rootMargin: '-30% 0px -60% 0px' }
+    )
+    sections.forEach(s => {
+      const el = document.getElementById(s.id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
+
+  const textStyle: React.CSSProperties = {
+    fontFamily: 'Source Sans 3, sans-serif',
+    fontSize: '16px',
+    lineHeight: '1.8',
+    color: '#4A4A4A',
+    margin: '0 0 16px 0',
+  }
+
   return (
-    <main style={{ backgroundColor: '#F8F6F1', minHeight: '100vh' }}>
-      {/* En-tête */}
-      <div style={{ backgroundColor: '#0A3D2E', padding: '80px 40px 60px' }}>
-        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+    <main style={{ backgroundColor: '#F8F6F1' }}>
+
+      {/* Hero */}
+      <section style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '60px 24px 48px' : '80px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '300px', height: '300px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.1)', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '40px', height: '2px', backgroundColor: '#C9A84C' }} />
             <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase' }}>
-              Informations légales
+              Légal
             </span>
           </div>
-          <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: '700', color: '#FFFFFF', margin: 0, lineHeight: '1.15' }}>
+          <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(32px, 4vw, 60px)', fontWeight: '700', color: '#FFFFFF', margin: '0 0 16px 0', lineHeight: '1.1' }}>
             Politique des cookies
           </h1>
-          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '15px', color: 'rgba(255,255,255,0.65)', marginTop: '16px', marginBottom: 0, lineHeight: '1.7', maxWidth: '600px' }}>
-            Dernière mise à jour : mai 2025
+          <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '16px', lineHeight: '1.7', color: 'rgba(255,255,255,0.7)', margin: 0, maxWidth: '600px' }}>
+            Comment la Commune d&apos;Adja-Ouèrè utilise les cookies sur son site officiel.
+            Dernière mise à jour : mai 2025.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* Contenu */}
-      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '60px 40px 80px' }}>
-        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: '48px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', border: '1px solid #E8E4DC' }}>
-          <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '16px', lineHeight: '1.8', color: '#4A4A4A', margin: '0 0 40px 0' }}>
-            La Commune d'Adja-Ouère s'engage à protéger votre vie privée. La présente politique explique comment nous utilisons les cookies sur notre site officiel.
-          </p>
+      <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '260px 1fr', gap: '48px', alignItems: 'start' }}>
 
-          {sections.map((section, i) => (
-            <div key={i} style={{ marginBottom: '40px' }}>
-              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: '700', color: '#0A3D2E', margin: '0 0 16px 0', paddingBottom: '12px', borderBottom: '2px solid #C9A84C' }}>
-                {section.titre}
-              </h2>
-
-              {section.contenu && (
-                <div>
-                  {section.contenu.split('\n\n').map((para, j) => (
-                    <p key={j} style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '15px', lineHeight: '1.8', color: '#4A4A4A', margin: '0 0 16px 0' }}>
-                      {para}
-                    </p>
-                  ))}
+          {/* Sommaire sticky desktop */}
+          {!isMobile && (
+            <div style={{ position: 'sticky', top: '90px' }}>
+              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '24px' }}>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
+                  Sommaire
                 </div>
-              )}
+                {sections.map(s => (
+                  <a key={s.id} href={`#${s.id}`}
+                    style={{
+                      display: 'block',
+                      fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: activeSection === s.id ? '700' : '400',
+                      color: activeSection === s.id ? '#0A3D2E' : '#6A6A6A',
+                      textDecoration: 'none',
+                      padding: '7px 0 7px 12px',
+                      borderLeft: `2px solid ${activeSection === s.id ? '#C9A84C' : 'transparent'}`,
+                      transition: 'all 0.2s ease',
+                      lineHeight: '1.3',
+                    }}
+                  >
+                    {s.titre}
+                  </a>
+                ))}
+              </div>
 
-              {'liste' in section && section.liste && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '8px' }}>
-                  {section.liste.map((item, j) => (
-                    <div key={j} style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '20px 24px', borderLeft: '4px solid #C9A84C' }}>
-                      <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700', color: '#0A3D2E', marginBottom: '8px' }}>
-                        {item.nom}
-                      </div>
-                      <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', lineHeight: '1.7', color: '#6A6A6A', margin: 0 }}>
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div style={{ marginTop: '16px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '8px' }}>📄 Voir aussi</div>
+                <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
+                  Mentions légales →
+                </Link>
+                <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
+                  Politique de confidentialité →
+                </Link>
+                <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
+                  Nous contacter →
+                </Link>
+              </div>
             </div>
-          ))}
-        </div>
+          )}
 
-        {/* Navigation retour */}
-        <div style={{ marginTop: '32px', display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-          <a href="/mentions-legales" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#0A3D2E', textDecoration: 'none', fontWeight: '600', padding: '10px 20px', borderRadius: '8px', border: '1px solid #0A3D2E', display: 'inline-block' }}>
-            ← Mentions légales
-          </a>
-          <a href="/politique-confidentialite" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#0A3D2E', textDecoration: 'none', fontWeight: '600', padding: '10px 20px', borderRadius: '8px', border: '1px solid #0A3D2E', display: 'inline-block' }}>
-            Politique de confidentialité →
-          </a>
-        </div>
-      </div>
+          {/* Corps du document */}
+          <div>
+            {sections.map((section, idx) => (
+              <div key={section.id} id={section.id}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '16px',
+                  border: '1px solid #E8E4DC',
+                  padding: isMobile ? '24px' : '36px',
+                  marginBottom: idx < sections.length - 1 ? '24px' : '0',
+                  scrollMarginTop: '100px',
+                }}
+              >
+                <h2 style={{
+                  fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(20px, 2.5vw, 28px)', fontWeight: '700',
+                  color: '#0A3D2E', margin: '0 0 20px 0', lineHeight: '1.2',
+                  paddingBottom: '16px', borderBottom: '2px solid #F8F6F1',
+                }}>
+                  {section.titre}
+                </h2>
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
-        @media (max-width: 768px) {
-          div[style*="padding: '48px'"] { padding: 28px !important; }
-        }
-      `}</style>
+                {section.contenu.map((bloc: any, i: number) => {
+                  if (bloc.type === 'texte') {
+                    return <p key={i} style={textStyle}>{bloc.valeur}</p>
+                  }
+
+                  if (bloc.type === 'blocs' && bloc.items) {
+                    return (
+                      <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
+                        {bloc.items.map((item: any, j: number) => (
+                          <div key={j} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '16px', backgroundColor: '#F8F6F1', borderRadius: '10px', border: '1px solid #E8E4DC' }}>
+                            <span style={{ fontSize: '22px', flexShrink: 0 }}>{item.icon}</span>
+                            <div>
+                              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700', color: '#0A3D2E', marginBottom: '4px' }}>{item.titre}</div>
+                              <div style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', lineHeight: '1.6', color: '#6A6A6A' }}>{item.valeur}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  }
+
+                  if (bloc.type === 'liste' && bloc.items) {
+                    return (
+                      <div key={i} style={{ backgroundColor: '#F8F6F1', borderRadius: '10px', padding: '20px', border: '1px solid #E8E4DC' }}>
+                        {bloc.items.map((item: any, j: number) => (
+                          <div key={j} style={{
+                            display: 'flex', gap: '12px', alignItems: 'flex-start',
+                            paddingBottom: j < bloc.items.length - 1 ? '12px' : '0',
+                            marginBottom: j < bloc.items.length - 1 ? '12px' : '0',
+                            borderBottom: j < bloc.items.length - 1 ? '1px solid #E8E4DC' : 'none',
+                          }}>
+                            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', minWidth: '140px', paddingTop: '2px' }}>
+                              {item.label}
+                            </span>
+                            <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '15px', color: '#1C1C1C', flex: 1 }}>
+                              {item.valeur}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  }
+
+                  return null
+                })}
+              </div>
+            ))}
+
+            {/* Documents liés */}
+            <div style={{ marginTop: '32px', padding: '24px', backgroundColor: '#0A3D2E', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
+                  Documents liés
+                </div>
+                <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: '700', color: '#FFFFFF' }}>
+                  Informations légales
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Link href="/mentions-legales" style={{ textDecoration: 'none' }}>
+                  <button style={{ padding: '11px 22px', borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.12)', color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700', border: '1px solid rgba(255,255,255,0.2)', cursor: 'pointer' }}>
+                    Mentions légales →
+                  </button>
+                </Link>
+                <Link href="/politique-confidentialite" style={{ textDecoration: 'none' }}>
+                  <button style={{ padding: '11px 22px', borderRadius: '8px', backgroundColor: '#C9A84C', color: '#0A3D2E', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700', border: 'none', cursor: 'pointer' }}>
+                    Confidentialité →
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   )
 }

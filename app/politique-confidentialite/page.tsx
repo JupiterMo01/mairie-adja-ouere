@@ -320,6 +320,9 @@ export default function PolitiqueConfidentialitePage() {
                 <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
                   Mentions légales →
                 </Link>
+                <Link href="/politique-cookies" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
+                  Politique des cookies →
+                </Link>
                 <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
                   Nous contacter →
                 </Link>
