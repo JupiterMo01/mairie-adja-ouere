@@ -93,21 +93,64 @@ export default function OpportunitesPage() {
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '24px' }}>
-            {[
-              { num: '01', titre: 'Consulter', desc: 'Parcourez les avis de marchés et offres d\'emploi publiés sur cette page.' },
-              { num: '02', titre: 'Préparer', desc: 'Rassemblez les documents requis : statuts, attestations fiscales, CV, lettres de motivation...' },
-              { num: '03', titre: 'Soumettre', desc: 'Déposez votre dossier sous pli fermé au secrétariat de la mairie avant la date limite indiquée.' },
-              { num: '04', titre: 'Être contacté', desc: 'Les candidats retenus seront contactés directement par la mairie par téléphone ou par courrier officiel.' },
-            ].map(step => (
-              <div key={step.num} style={{ padding: '28px 24px', borderRadius: '16px', border: '1px solid rgba(201,168,76,0.2)', backgroundColor: 'rgba(255,255,255,0.04)' }}>
-                <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '48px', fontWeight: '700', color: '#C9A84C', lineHeight: '1', marginBottom: '12px', opacity: 0.7 }}>
-                  {step.num}
-                </div>
-                <h3 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '16px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 10px 0' }}>{step.titre}</h3>
-                <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', lineHeight: '1.6', color: 'rgba(255,255,255,0.65)', margin: 0 }}>{step.desc}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '40px' }}>
+
+            {/* Colonne Marchés publics */}
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
+                <div style={{ fontSize: '28px' }}>🏗️</div>
+                <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: '700', color: '#C9A84C', margin: 0 }}>
+                  Marchés publics
+                </h3>
               </div>
-            ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {[
+                  { num: '01', titre: 'Consulter', desc: 'Parcourez les avis de marchés publiés sur la page des marchés publics.' },
+                  { num: '02', titre: 'Retirer le DAO', desc: 'Téléchargez ou retirez le Dossier d\'Appel d\'Offres au secrétariat de la PRMP à la mairie.' },
+                  { num: '03', titre: 'Soumettre', desc: 'Déposez votre offre sous pli fermé au secrétariat de la mairie avant la date et l\'heure limites.' },
+                  { num: '04', titre: 'Résultats', desc: 'Les résultats d\'attribution sont publiés et les soumissionnaires retenus sont notifiés officiellement.' },
+                ].map(step => (
+                  <div key={step.num} style={{ display: 'flex', gap: '16px', padding: '20px', borderRadius: '12px', border: '1px solid rgba(201,168,76,0.2)', backgroundColor: 'rgba(255,255,255,0.04)' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '32px', fontWeight: '700', color: '#C9A84C', lineHeight: '1', flexShrink: 0, opacity: 0.7, minWidth: '36px' }}>
+                      {step.num}
+                    </div>
+                    <div>
+                      <h4 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '15px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 6px 0' }}>{step.titre}</h4>
+                      <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.65)', margin: 0 }}>{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Colonne Recrutements */}
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
+                <div style={{ fontSize: '28px' }}>💼</div>
+                <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '24px', fontWeight: '700', color: '#C9A84C', margin: 0 }}>
+                  Recrutements
+                </h3>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {[
+                  { num: '01', titre: 'Consulter', desc: 'Parcourez les offres d\'emploi disponibles sur la page des recrutements.' },
+                  { num: '02', titre: 'Préparer', desc: 'Constituez votre dossier : CV, lettre de motivation, diplômes, attestations et tout document exigé dans l\'offre.' },
+                  { num: '03', titre: 'Soumettre', desc: 'Déposez votre dossier au secrétariat de la mairie avant la date limite indiquée dans l\'annonce.' },
+                  { num: '04', titre: 'Être contacté', desc: 'Les candidats retenus sont contactés directement par la mairie par téléphone ou courrier officiel.' },
+                ].map(step => (
+                  <div key={step.num} style={{ display: 'flex', gap: '16px', padding: '20px', borderRadius: '12px', border: '1px solid rgba(201,168,76,0.2)', backgroundColor: 'rgba(255,255,255,0.04)' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '32px', fontWeight: '700', color: '#C9A84C', lineHeight: '1', flexShrink: 0, opacity: 0.7, minWidth: '36px' }}>
+                      {step.num}
+                    </div>
+                    <div>
+                      <h4 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '15px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 6px 0' }}>{step.titre}</h4>
+                      <p style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.65)', margin: 0 }}>{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
