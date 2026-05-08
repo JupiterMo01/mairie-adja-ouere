@@ -125,7 +125,7 @@ export default function Navbar() {
     { label: 'Accueil', href: '/' },
     {
       label: 'Présentation',
-      href: '/presentation/commune',
+      href: '/presentation',
       submenu: [
         { label: 'La commune', href: '/presentation/commune' },
         { label: 'Instances et Services', href: '/presentation/instances' },
@@ -171,7 +171,7 @@ export default function Navbar() {
 
   const mobileGroups = [
     { label: 'Accueil', href: '/', indent: false },
-    { label: 'Présentation', href: '/presentation/commune', indent: false },
+    { label: 'Présentation', href: '/presentation', indent: false },
     { label: 'La commune', href: '/presentation/commune', indent: true },
     { label: 'Instances et Services', href: '/presentation/instances', indent: true },
     { label: 'Arrondissements', href: '/presentation/arrondissements', indent: true },
@@ -210,9 +210,6 @@ export default function Navbar() {
       borderBottom: '1px solid rgba(201, 168, 76, 0.3)',
       transition: 'padding 0.3s ease',
       padding: scrolled ? '10px 0' : '16px 0',
-      transform: 'translateZ(0)',
-      WebkitTransform: 'translateZ(0)',
-      willChange: 'transform',
     }}>
       <div
         className="nav-inner"

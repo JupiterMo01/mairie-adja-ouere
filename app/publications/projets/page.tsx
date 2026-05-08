@@ -198,7 +198,7 @@ function Modal({ projet, onClose }: { projet: typeof projets[0]; onClose: () => 
     <div
       onClick={onClose}
       style={{
-        position: 'fixed', inset: 0, zIndex: 10000,
+        position: 'fixed', inset: 0, zIndex: 99999,
         backgroundColor: 'rgba(10,61,46,0.6)',
         backdropFilter: 'blur(4px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
