@@ -152,6 +152,18 @@ export default function ActualiteDetailPage() {
 
   return (
     <main style={{ backgroundColor: '#F8F6F1' }}>
+      <style>{`
+        .actu-content-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 60px;
+          align-items: start;
+        }
+        @media (max-width: 768px) {
+          .actu-content-grid { grid-template-columns: 1fr; gap: 40px; }
+          .actu-sidebar { display: none; }
+        }
+      `}</style>
 
       {/* Image hero */}
       <div style={{
@@ -215,12 +227,7 @@ export default function ActualiteDetailPage() {
       {/* Contenu */}
       <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr',
-            gap: '60px',
-            alignItems: 'start',
-          }}>
+          <div className="actu-content-grid">
 
             {/* Article */}
             <div>
@@ -347,7 +354,7 @@ export default function ActualiteDetailPage() {
             </div>
 
             {/* Sidebar — autres actualités */}
-            <div style={{ position: 'sticky', top: '100px' }}>
+            <div className="actu-sidebar" style={{ position: 'sticky', top: '100px' }}>
               <h3 style={{
                 fontFamily: 'Cormorant Garamond, serif', fontSize: '24px',
                 fontWeight: '700', color: '#0A3D2E',

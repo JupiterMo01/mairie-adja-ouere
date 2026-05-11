@@ -100,31 +100,12 @@ const sections = [
 
 export default function PolitiqueCookiesPage() {
   const [isMobile, setIsMobile] = React.useState(false)
-  const [isNarrow, setIsNarrow] = React.useState(true)
-  const [activeSection, setActiveSection] = React.useState('')
 
   React.useEffect(() => {
-    const check = () => {
-      setIsMobile(window.innerWidth < 768)
-      setIsNarrow(window.innerWidth < 1024)
-    }
+    const check = () => setIsMobile(window.innerWidth < 768)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
-  }, [])
-
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) })
-      },
-      { rootMargin: '-30% 0px -60% 0px' }
-    )
-    sections.forEach(s => {
-      const el = document.getElementById(s.id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
   }, [])
 
   const textStyle: React.CSSProperties = {
@@ -160,47 +141,7 @@ export default function PolitiqueCookiesPage() {
 
       {/* Contenu */}
       <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
-        <div className="page-sidebar-grid">
-
-          {/* Sommaire sticky desktop */}
-          {!isNarrow && (
-            <div style={{ position: 'sticky', top: '90px' }}>
-              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '24px' }}>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
-                  Sommaire
-                </div>
-                {sections.map(s => (
-                  <a key={s.id} href={`#${s.id}`}
-                    style={{
-                      display: 'block',
-                      fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: activeSection === s.id ? '700' : '400',
-                      color: activeSection === s.id ? '#0A3D2E' : '#6A6A6A',
-                      textDecoration: 'none',
-                      padding: '7px 0 7px 12px',
-                      borderLeft: `2px solid ${activeSection === s.id ? '#C9A84C' : 'transparent'}`,
-                      transition: 'all 0.2s ease',
-                      lineHeight: '1.3',
-                    }}
-                  >
-                    {s.titre}
-                  </a>
-                ))}
-              </div>
-
-              <div style={{ marginTop: '16px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '8px' }}>📄 Voir aussi</div>
-                <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
-                  Mentions légales →
-                </Link>
-                <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '6px', fontWeight: '500' }}>
-                  Politique de confidentialité →
-                </Link>
-                <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
-                  Nous contacter →
-                </Link>
-              </div>
-            </div>
-          )}
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
           {/* Corps du document */}
           <div>
@@ -273,22 +214,6 @@ export default function PolitiqueCookiesPage() {
                 })}
               </div>
             ))}
-
-            {/* Voir aussi — mobile uniquement */}
-            {isNarrow && (
-              <div style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
-                <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                  Mentions légales →
-                </Link>
-                <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                  Politique de confidentialité →
-                </Link>
-                <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
-                  Nous contacter →
-                </Link>
-              </div>
-            )}
 
             {/* Documents liés */}
             <div style={{ marginTop: '32px', padding: '24px', backgroundColor: '#0A3D2E', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
