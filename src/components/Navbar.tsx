@@ -219,32 +219,34 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {/* Armoirie */}
             <img
               src="/armoirie.png"
               alt="Armoirie du Bénin"
-              style={{ width: isMobile ? '42px' : '56px', height: isMobile ? '42px' : '56px', objectFit: 'contain', flexShrink: 0 }}
+              style={{ width: isMobile ? '38px' : '56px', height: isMobile ? '38px' : '56px', objectFit: 'contain', flexShrink: 0 }}
             />
-            {/* Bloc texte */}
-            <div>
-              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: isMobile ? '9px' : '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
-                République du Bénin
+            {/* Bloc texte — masqué sur mobile */}
+            {!isMobile && (
+              <div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+                  République du Bénin
+                </div>
+                <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
+                  <div style={{ flex: 1, backgroundColor: '#008751' }} />
+                  <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
+                  <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
+                </div>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+                  Commune d&apos;Adja-Ouèrè
+                </div>
               </div>
-              <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
-                <div style={{ flex: 1, backgroundColor: '#008751' }} />
-                <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
-                <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
-              </div>
-              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: isMobile ? '9px' : '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
-                Commune d&apos;Adja-Ouèrè
-              </div>
-            </div>
+            )}
             {/* Logo commune */}
             <img
               src="/logo.jpeg"
               alt="Logo Commune d'Adja-Ouèrè"
-              style={{ width: isMobile ? '46px' : '62px', height: isMobile ? '46px' : '62px', objectFit: 'contain', flexShrink: 0 }}
+              style={{ width: isMobile ? '38px' : '62px', height: isMobile ? '38px' : '62px', objectFit: 'contain', flexShrink: 0 }}
             />
           </div>
         </Link>
