@@ -1,5 +1,4 @@
-import type { Metadata } from 'next'
-import Breadcrumb from '@/src/components/Breadcrumb'
+﻿import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: "Nos marchés — Commune d'Adja-Ouèrè",
@@ -14,14 +13,5 @@ export const metadata: Metadata = {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Breadcrumb items={[
-        { label: 'Accueil', href: '/' },
-        { label: 'Présentation', href: '/presentation' },
-        { label: 'Nos marchés', href: '/presentation/marches' },
-      ]} />
-      {children}
-    </>
-  )
+  return <>{children}</>
 }

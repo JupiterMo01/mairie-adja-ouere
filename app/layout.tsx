@@ -6,6 +6,7 @@ import CookieBanner from '@/src/components/CookieBanner'
 import BackToTop from '@/src/components/BackToTop'
 import ScrollRestoration from '@/src/components/ScrollRestoration'
 import SkipLink from '@/src/components/SkipLink'
+import AutoBreadcrumb from '@/src/components/AutoBreadcrumb'
 
 export const metadata: Metadata = {
   title: "Commune d'Adja-Ouèrè — Site officiel",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Navbar />
 
         <div id="contenu-principal">
+          <AutoBreadcrumb />
           {children}
         </div>
 
