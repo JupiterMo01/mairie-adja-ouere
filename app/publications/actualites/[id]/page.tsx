@@ -4,6 +4,13 @@ import React from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
+interface Fichier {
+  nom: string
+  type: string
+  taille: string
+  url: string
+}
+
 const actualites = [
   {
     id: 1,
@@ -14,6 +21,10 @@ const actualites = [
     date: "04 Mars 2026",
     auteur: "Service Communication",
     image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=1200&q=80",
+    fichiers: [
+      { nom: "Procès-verbal session mars 2026.pdf", type: "PDF", taille: "1.2 Mo", url: "#" },
+      { nom: "Budget rectificatif 2026.pdf", type: "PDF", taille: "540 Ko", url: "#" },
+    ] as Fichier[],
   },
   {
     id: 2,
@@ -34,6 +45,9 @@ const actualites = [
     date: "28 Fév 2026",
     auteur: "Direction du Développement Local",
     image: "https://images.unsplash.com/photo-1509390874189-f0d9b709bb41?w=1200&q=80",
+    fichiers: [
+      { nom: "Note de présentation projet électrification.pdf", type: "PDF", taille: "2.1 Mo", url: "#" },
+    ] as Fichier[],
   },
   {
     id: 4,
@@ -44,6 +58,11 @@ const actualites = [
     date: "25 Fév 2026",
     auteur: "Direction des Affaires Financières",
     image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=1200&q=80",
+    fichiers: [
+      { nom: "Budget primitif 2026 — version adoptée.pdf", type: "PDF", taille: "3.4 Mo", url: "#" },
+      { nom: "Annexes budgétaires 2026.pdf", type: "PDF", taille: "1.8 Mo", url: "#" },
+      { nom: "Délibération n°01-2026.pdf", type: "PDF", taille: "280 Ko", url: "#" },
+    ] as Fichier[],
   },
   {
     id: 5,
@@ -54,6 +73,9 @@ const actualites = [
     date: "20 Fév 2026",
     auteur: "Cabinet du Maire",
     image: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=1200&q=80",
+    fichiers: [
+      { nom: "Rapport de reddition de compte 2025.pdf", type: "PDF", taille: "5.6 Mo", url: "#" },
+    ] as Fichier[],
   },
   {
     id: 6,
@@ -84,6 +106,9 @@ const actualites = [
     date: "08 Fév 2026",
     auteur: "Cabinet du Maire",
     image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&q=80",
+    fichiers: [
+      { nom: "Communiqué officiel — Journée salubrité 2026.pdf", type: "PDF", taille: "180 Ko", url: "#" },
+    ] as Fichier[],
   },
 ]
 
@@ -237,6 +262,72 @@ export default function ActualiteDetailPage() {
                   <p key={i} style={{ margin: '0 0 20px 0' }}>{para}</p>
                 ))}
               </div>
+
+              {/* Fichiers joints */}
+              {actu.fichiers && actu.fichiers.length > 0 && (
+                <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid #E8E4DC' }}>
+                  <h3 style={{
+                    fontFamily: 'Cormorant Garamond, serif', fontSize: '22px',
+                    fontWeight: '700', color: '#0A3D2E', margin: '0 0 16px 0',
+                    display: 'flex', alignItems: 'center', gap: '10px',
+                  }}>
+                    <span style={{ fontSize: '20px' }}>📎</span>
+                    Fichiers joints
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {actu.fichiers.map((fichier, idx) => (
+                      <a
+                        key={idx}
+                        href={fichier.url}
+                        download
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: '14px',
+                          backgroundColor: '#FFFFFF', border: '1px solid #E8E4DC',
+                          borderRadius: '10px', padding: '14px 18px',
+                          textDecoration: 'none', transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.borderColor = '#C9A84C'
+                          e.currentTarget.style.backgroundColor = '#FFFDF7'
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.borderColor = '#E8E4DC'
+                          e.currentTarget.style.backgroundColor = '#FFFFFF'
+                        }}
+                      >
+                        <div style={{
+                          width: '40px', height: '40px', borderRadius: '8px',
+                          backgroundColor: 'rgba(10,61,46,0.08)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          flexShrink: 0, fontSize: '18px',
+                        }}>
+                          {fichier.type === 'PDF' ? '📄' : fichier.type === 'Excel' ? '📊' : '📁'}
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{
+                            fontFamily: 'Outfit, sans-serif', fontSize: '14px',
+                            fontWeight: '600', color: '#1C1C1C',
+                            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                          }}>
+                            {fichier.nom}
+                          </div>
+                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#9A9A9A', marginTop: '2px' }}>
+                            {fichier.type} · {fichier.taille}
+                          </div>
+                        </div>
+                        <div style={{
+                          flexShrink: 0, backgroundColor: '#0A3D2E', color: '#FFFFFF',
+                          fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600',
+                          padding: '6px 14px', borderRadius: '20px',
+                          display: 'flex', alignItems: 'center', gap: '6px',
+                        }}>
+                          ⬇ Télécharger
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Bouton retour */}
               <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid #E8E4DC' }}>

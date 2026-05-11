@@ -68,11 +68,13 @@ export default function Footer() {
     { label: 'Les sites touristiques', href: '/presentation/sites-touristiques'},
     { label: 'Nos marchés', href: '/presentation/marches' },
     { label: 'Nos gares routières', href: '/presentation/gares' },
+    { label: 'Foire aux questions', href: '/faq' },
     { label: 'Contact', href: '/contact' },
   ]
 
   const publications = [
     { label: 'Actualités', href: '/publications/actualites' },
+    { label: 'Reddition de compte', href: '/publications/reddition-de-compte' },
     { label: 'Projets', href: '/publications/projets' },
     { label: 'Evenements', href: '/publications/evenements' },
     { label: 'Documents', href: '/publications/documents' },

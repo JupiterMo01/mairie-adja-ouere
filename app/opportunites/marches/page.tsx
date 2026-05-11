@@ -900,16 +900,16 @@ export default function MarchesPublicsPage() {
                 </button>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center', width: isMobile ? '100%' : 'auto' }}>
               <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: '#9A9A9A', whiteSpace: 'nowrap' }}>
                 {marchesFiltres.length} résultat{marchesFiltres.length > 1 ? 's' : ''}
               </span>
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
                 <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '13px', pointerEvents: 'none' }}>🔍</span>
                 <input
                   type="text" placeholder="Rechercher..." value={recherche}
                   onChange={e => setRecherche(e.target.value)}
-                  style={{ padding: '6px 14px 6px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: isMobile ? '100%' : '200px' }}
+                  style={{ padding: '6px 14px 6px 34px', fontFamily: 'Outfit, sans-serif', fontSize: '13px', border: '1px solid #E8E4DC', borderRadius: '20px', outline: 'none', backgroundColor: '#F8F6F1', width: '100%', boxSizing: 'border-box' }}
                 />
               </div>
             </div>

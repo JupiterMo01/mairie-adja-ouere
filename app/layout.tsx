@@ -4,6 +4,7 @@ import Footer from '@/src/components/Footer'
 import SectionNewsletter from '@/src/components/SectionNewsletter'
 import CookieBanner from '@/src/components/CookieBanner'
 import BackToTop from '@/src/components/BackToTop'
+import ScrollRestoration from '@/src/components/ScrollRestoration'
 
 export const metadata: Metadata = {
   title: "Commune d'Adja-Ouèrè — Site officiel",
@@ -62,8 +63,17 @@ export default function RootLayout({
 
         <SectionNewsletter />
         <Footer />
+
+        {/* Bandeau drapeau du Bénin */}
+        <div style={{ display: 'flex', width: '100%', height: '10px' }}>
+          <div style={{ flex: 1, backgroundColor: '#008751' }} />
+          <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
+          <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
+        </div>
+
         <CookieBanner />
         <BackToTop />
+        <ScrollRestoration />
 
         <style>{`
           /* Focus visible pour navigation clavier */

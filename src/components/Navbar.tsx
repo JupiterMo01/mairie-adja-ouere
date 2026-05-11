@@ -140,6 +140,7 @@ export default function Navbar() {
       href: '/publications',
       submenu: [
         { label: 'Actualités', href: '/publications/actualites' },
+        { label: 'Reddition de compte', href: '/publications/reddition-de-compte' },
         { label: 'Projets', href: '/publications/projets' },
         { label: 'Événements', href: '/publications/evenements' },
         { label: 'Documents', href: '/publications/documents' },
@@ -180,6 +181,7 @@ export default function Navbar() {
     { label: 'Gares routières', href: '/presentation/gares', indent: true },
     { label: 'Publications', href: '/publications', indent: false },
     { label: 'Actualités', href: '/publications/actualites', indent: true },
+    { label: 'Reddition de compte', href: '/publications/reddition-de-compte', indent: true },
     { label: 'Projets', href: '/publications/projets', indent: true },
     { label: 'Événements', href: '/publications/evenements', indent: true },
     { label: 'Documents', href: '/publications/documents', indent: true },
