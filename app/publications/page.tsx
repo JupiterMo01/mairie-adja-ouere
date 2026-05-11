@@ -14,6 +14,15 @@ const categories = [
     tags: ['Conseil municipal', 'Travaux', 'Annonces'],
   },
   {
+    icon: '📊',
+    titre: 'Reddition de compte',
+    description: 'Consultez les rapports de reddition de compte de la Commune. Conformément à la loi, le Maire rend compte de la gestion des ressources publiques devant le conseil communal et la population.',
+    href: '/publications/reddition-de-compte',
+    badge: 'Transparence & gouvernance',
+    color: '#156840',
+    tags: ['Rapport annuel', 'Budget', 'Transparence'],
+  },
+  {
     icon: '🏗️',
     titre: 'Projets',
     description: 'Découvrez les projets de développement portés par la mairie : infrastructures, programmes sociaux, aménagements territoriaux et initiatives communautaires.',

@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 
 const redditions = [
   {
@@ -23,9 +22,11 @@ const redditions = [
       taille: "1,1 Mo — PDF",
     },
     photos: [
-      { url: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=600&q=80", legende: "Séance de présentation" },
-      { url: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=600&q=80", legende: "Conseil communal" },
-      { url: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=600&q=80", legende: "Participation citoyenne" },
+      { url: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80", legende: "Séance d'ouverture" },
+      { url: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&q=80", legende: "Présentation au conseil communal" },
+      { url: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80", legende: "Participation citoyenne" },
+      { url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80", legende: "Échanges avec la population" },
+      { url: "https://images.unsplash.com/photo-1509390874189-f0d9b709bb41?w=800&q=80", legende: "Délibération du conseil" },
     ],
     stats: [
       { label: "Taux d'exécution budgétaire", valeur: "87%" },
@@ -54,8 +55,9 @@ const redditions = [
       taille: "820 Ko — PDF",
     },
     photos: [
-      { url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80", legende: "Présentation du rapport" },
-      { url: "https://images.unsplash.com/photo-1509390874189-f0d9b709bb41?w=600&q=80", legende: "Délibération" },
+      { url: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80", legende: "Présentation du rapport S1" },
+      { url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80", legende: "Délibération du conseil" },
+      { url: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&q=80", legende: "Séance plénière" },
     ],
     stats: [
       { label: "Taux d'exécution S1", valeur: "41%" },
@@ -84,8 +86,10 @@ const redditions = [
       taille: "1,4 Mo — PDF",
     },
     photos: [
-      { url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80", legende: "Session de reddition" },
-      { url: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80", legende: "Présentation citoyenne" },
+      { url: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&q=80", legende: "Session de reddition 2024" },
+      { url: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80", legende: "Présentation citoyenne" },
+      { url: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80", legende: "Remise des documents" },
+      { url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80", legende: "Réunion du conseil" },
     ],
     stats: [
       { label: "Taux d'exécution budgétaire", valeur: "82%" },
@@ -102,7 +106,36 @@ const anneesDisponibles = [...new Set(redditions.map(r => r.annee))].sort((a, b)
 export default function RedditionDeComptePage() {
   const [isMobile, setIsMobile] = React.useState(false)
   const [filtreAnnee, setFiltreAnnee] = React.useState<number | 'toutes'>('toutes')
-  const [selectedReddition, setSelectedReddition] = React.useState<typeof redditions[0] | null>(null)
+
+  // Lightbox
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
+  const [lightboxRedditionId, setLightboxRedditionId] = React.useState<number | null>(null)
+  const [lightboxPhotoIdx, setLightboxPhotoIdx] = React.useState(0)
+
+  const lightboxReddition = redditions.find(r => r.id === lightboxRedditionId) ?? null
+  const lightboxPhotos = lightboxReddition?.photos ?? []
+
+  const openLightbox = (redditionId: number, idx: number) => {
+    setLightboxRedditionId(redditionId)
+    setLightboxPhotoIdx(idx)
+    setLightboxOpen(true)
+  }
+
+  React.useEffect(() => {
+    if (!lightboxOpen) return
+    document.body.style.overflow = 'hidden'
+    const count = lightboxPhotos.length
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxOpen(false)
+      if (e.key === 'ArrowLeft') setLightboxPhotoIdx(i => (i - 1 + count) % count)
+      if (e.key === 'ArrowRight') setLightboxPhotoIdx(i => (i + 1) % count)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [lightboxOpen, lightboxPhotos.length])
 
   React.useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
@@ -246,7 +279,7 @@ export default function RedditionDeComptePage() {
                 </p>
 
                 {/* Statistiques clés */}
-                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '28px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
                   {r.stats.map((stat, i) => (
                     <div key={i} style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '16px', textAlign: 'center', border: '1px solid #E8E4DC' }}>
                       <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '28px', fontWeight: '700', color: '#0A3D2E', lineHeight: '1' }}>
@@ -260,7 +293,7 @@ export default function RedditionDeComptePage() {
                 </div>
 
                 {/* Documents + Photos */}
-                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '28px' }}>
 
                   {/* Deux fichiers */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -296,16 +329,27 @@ export default function RedditionDeComptePage() {
                     ))}
                   </div>
 
-                  {/* Photos */}
+                  {/* Galerie photos */}
                   <div>
-                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
+                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       Photos de la séance
+                      <span style={{ backgroundColor: '#E8E4DC', borderRadius: '10px', padding: '1px 8px', fontSize: '10px', color: '#6A6A6A' }}>
+                        {r.photos.length}
+                      </span>
                     </div>
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))',
+                      gap: '8px',
+                    }}>
                       {r.photos.map((photo, i) => (
-                        <div key={i} style={{ flex: 1, aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
-                          <img src={photo.url} alt={photo.legende} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>
+                        <PhotoThumb
+                          key={i}
+                          photo={photo}
+                          index={i}
+                          total={r.photos.length}
+                          onClick={() => openLightbox(r.id, i)}
+                        />
                       ))}
                     </div>
                   </div>
@@ -332,6 +376,185 @@ export default function RedditionDeComptePage() {
         </div>
       </section>
 
+      {/* Lightbox */}
+      {lightboxOpen && lightboxReddition && (
+        <div
+          onClick={() => setLightboxOpen(false)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 99999,
+            backgroundColor: 'rgba(0,0,0,0.93)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          {/* Fermer */}
+          <button
+            onClick={() => setLightboxOpen(false)}
+            style={{
+              position: 'absolute', top: '20px', right: '24px',
+              background: 'rgba(255,255,255,0.1)', border: 'none',
+              color: '#FFFFFF', fontSize: '20px', cursor: 'pointer',
+              borderRadius: '50%', width: '44px', height: '44px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              zIndex: 10,
+            }}
+            aria-label="Fermer"
+          >
+            ✕
+          </button>
+
+          {/* Compteur */}
+          <div style={{
+            position: 'absolute', top: '26px', left: '50%', transform: 'translateX(-50%)',
+            color: 'rgba(255,255,255,0.6)', fontFamily: 'Outfit, sans-serif', fontSize: '13px',
+            pointerEvents: 'none',
+          }}>
+            {lightboxPhotoIdx + 1} / {lightboxPhotos.length}
+          </div>
+
+          {/* Flèche gauche */}
+          {lightboxPhotos.length > 1 && (
+            <button
+              onClick={e => { e.stopPropagation(); setLightboxPhotoIdx(i => (i - 1 + lightboxPhotos.length) % lightboxPhotos.length) }}
+              style={{
+                position: 'absolute', left: '16px',
+                background: 'rgba(255,255,255,0.1)', border: 'none',
+                color: '#FFFFFF', fontSize: '28px', cursor: 'pointer',
+                borderRadius: '50%', width: '52px', height: '52px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s ease',
+              }}
+              aria-label="Photo précédente"
+            >
+              ‹
+            </button>
+          )}
+
+          {/* Image */}
+          <div onClick={e => e.stopPropagation()} style={{ maxWidth: '90vw', textAlign: 'center' }}>
+            <img
+              src={lightboxPhotos[lightboxPhotoIdx].url}
+              alt={lightboxPhotos[lightboxPhotoIdx].legende}
+              style={{
+                maxWidth: '90vw', maxHeight: '80vh',
+                objectFit: 'contain', borderRadius: '8px', display: 'block',
+                margin: '0 auto',
+              }}
+            />
+            <div style={{
+              marginTop: '14px',
+              color: 'rgba(255,255,255,0.65)',
+              fontFamily: 'Outfit, sans-serif', fontSize: '13px',
+            }}>
+              {lightboxPhotos[lightboxPhotoIdx].legende}
+            </div>
+
+            {/* Miniatures de navigation */}
+            {lightboxPhotos.length > 1 && (
+              <div style={{
+                display: 'flex', gap: '8px', justifyContent: 'center',
+                marginTop: '16px', flexWrap: 'wrap',
+              }}>
+                {lightboxPhotos.map((p, i) => (
+                  <button
+                    key={i}
+                    onClick={e => { e.stopPropagation(); setLightboxPhotoIdx(i) }}
+                    style={{
+                      width: '48px', height: '48px', borderRadius: '6px', overflow: 'hidden',
+                      border: `2px solid ${i === lightboxPhotoIdx ? '#C9A84C' : 'transparent'}`,
+                      padding: 0, cursor: 'pointer', flexShrink: 0,
+                      transition: 'border-color 0.15s ease',
+                    }}
+                  >
+                    <img src={p.url} alt={p.legende} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Flèche droite */}
+          {lightboxPhotos.length > 1 && (
+            <button
+              onClick={e => { e.stopPropagation(); setLightboxPhotoIdx(i => (i + 1) % lightboxPhotos.length) }}
+              style={{
+                position: 'absolute', right: '16px',
+                background: 'rgba(255,255,255,0.1)', border: 'none',
+                color: '#FFFFFF', fontSize: '28px', cursor: 'pointer',
+                borderRadius: '50%', width: '52px', height: '52px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s ease',
+              }}
+              aria-label="Photo suivante"
+            >
+              ›
+            </button>
+          )}
+        </div>
+      )}
+
     </main>
+  )
+}
+
+function PhotoThumb({ photo, index, total, onClick }: {
+  photo: { url: string; legende: string }
+  index: number
+  total: number
+  onClick: () => void
+}) {
+  const [hovered, setHovered] = React.useState(false)
+  const isOverlay = index === 3 && total > 4
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        aspectRatio: '1',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        position: 'relative',
+        display: index >= 4 && total > 4 ? 'none' : 'block',
+      }}
+    >
+      <img
+        src={photo.url}
+        alt={photo.legende}
+        style={{
+          width: '100%', height: '100%', objectFit: 'cover',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)',
+          transition: 'transform 0.25s ease',
+          display: 'block',
+        }}
+      />
+      {/* Overlay hover */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundColor: 'rgba(10,61,46,0.45)',
+        opacity: hovered ? 1 : 0,
+        transition: 'opacity 0.2s ease',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <span style={{ color: '#FFFFFF', fontSize: '18px' }}>🔍</span>
+      </div>
+      {/* +N overlay sur la 4ème photo si > 4 */}
+      {isOverlay && (
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundColor: 'rgba(10,61,46,0.72)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexDirection: 'column', gap: '2px',
+        }}>
+          <span style={{ color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '20px', fontWeight: '700' }}>
+            +{total - 3}
+          </span>
+          <span style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Outfit, sans-serif', fontSize: '10px' }}>
+            photos
+          </span>
+        </div>
+      )}
+    </div>
   )
 }
