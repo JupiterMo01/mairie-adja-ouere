@@ -135,7 +135,7 @@ export default function PolitiqueCookiesPage() {
     <main style={{ backgroundColor: '#F8F6F1' }}>
 
       {/* Hero */}
-      <section className="page-hero-section" style={{ backgroundColor: '#0A3D2E', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '60px 24px 48px' : '80px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '300px', height: '300px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.1)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
@@ -155,7 +155,7 @@ export default function PolitiqueCookiesPage() {
       </section>
 
       {/* Contenu */}
-      <section className="page-content-section">
+      <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
         <div className="page-sidebar-grid">
 
           {/* Sommaire sticky desktop */}
@@ -206,7 +206,7 @@ export default function PolitiqueCookiesPage() {
                   backgroundColor: '#FFFFFF',
                   borderRadius: '16px',
                   border: '1px solid #E8E4DC',
-                  padding: '36px',
+                  padding: isMobile ? '24px' : '36px',
                   marginBottom: idx < sections.length - 1 ? '24px' : '0',
                   scrollMarginTop: '100px',
                 }}

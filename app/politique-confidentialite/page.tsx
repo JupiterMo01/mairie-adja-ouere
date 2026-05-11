@@ -247,7 +247,7 @@ export default function PolitiqueConfidentialitePage() {
     <main style={{ backgroundColor: '#F8F6F1' }}>
 
       {/* Hero */}
-      <section className="page-hero-section" style={{ backgroundColor: '#0A3D2E', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '60px 24px 48px' : '80px 40px 64px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '300px', height: '300px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.1)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
@@ -267,9 +267,9 @@ export default function PolitiqueConfidentialitePage() {
       </section>
 
       {/* Résumé rapide */}
-      <section className="page-resume-section" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E8E4DC' }}>
+      <section style={{ backgroundColor: '#FFFFFF', padding: isMobile ? '32px 24px' : '40px 40px', borderBottom: '1px solid #E8E4DC' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div className="page-stats-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '16px' }}>
             {[
               { icon: '🔒', titre: 'Données protégées', desc: 'Chiffrement SSL et accès restreint' },
               { icon: '🚫', titre: 'Pas de revente', desc: 'Vos données ne sont jamais vendues' },
@@ -287,7 +287,7 @@ export default function PolitiqueConfidentialitePage() {
       </section>
 
       {/* Contenu */}
-      <section className="page-content-section">
+      <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
         <div className="page-sidebar-grid">
 
           {/* Sommaire sticky */}
@@ -338,7 +338,7 @@ export default function PolitiqueConfidentialitePage() {
                   backgroundColor: '#FFFFFF',
                   borderRadius: '16px',
                   border: '1px solid #E8E4DC',
-                  padding: '36px',
+                  padding: isMobile ? '24px' : '36px',
                   marginBottom: idx < sections.length - 1 ? '24px' : '0',
                   scrollMarginTop: '100px',
                 }}
@@ -404,7 +404,7 @@ export default function PolitiqueConfidentialitePage() {
 
                   if (bloc.type === 'droits' && bloc.items) {
                     return (
-                      <div key={i} className="page-droits-grid" style={{ marginBottom: '16px' }}>
+                      <div key={i} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
                         {bloc.items.map((item, j) => (
                           <div key={j} style={{ padding: '16px', backgroundColor: '#F8F6F1', borderRadius: '10px', border: '1px solid #E8E4DC' }}>
                             <div style={{ fontSize: '22px', marginBottom: '8px' }}>{item.icon}</div>

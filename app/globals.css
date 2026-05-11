@@ -44,8 +44,6 @@ body {
 }
 
 /* Grille page avec sidebar (mentions légales, politique cookies, etc.) */
-.page-hero-section { padding: 80px 40px 64px; }
-.page-content-section { padding: 60px 40px; }
 .page-sidebar-grid {
   max-width: 1400px;
   margin: 0 auto;
@@ -54,17 +52,7 @@ body {
   gap: 48px;
   align-items: start;
 }
-.page-sidebar-col { display: block; }
-.page-card-padding { padding: 36px; }
-.page-resume-section { padding: 40px 40px; }
-.page-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.page-droits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 @media (max-width: 767px) {
-  .page-hero-section { padding: 60px 24px 48px; }
-  .page-content-section { padding: 40px 24px; }
   .page-sidebar-grid { grid-template-columns: 1fr; gap: 0; }
-  .page-resume-section { padding: 32px 24px; }
-  .page-stats-grid { grid-template-columns: 1fr 1fr; }
-  .page-droits-grid { grid-template-columns: 1fr; }
 }
