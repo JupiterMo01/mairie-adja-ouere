@@ -212,10 +212,14 @@ const sections = [
 
 export default function PolitiqueConfidentialitePage() {
   const [isMobile, setIsMobile] = React.useState(false)
+  const [isNarrow, setIsNarrow] = React.useState(true)
   const [activeSection, setActiveSection] = React.useState('')
 
   React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
+    const check = () => {
+      setIsMobile(window.innerWidth < 768)
+      setIsNarrow(window.innerWidth < 1024)
+    }
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
@@ -291,7 +295,7 @@ export default function PolitiqueConfidentialitePage() {
         <div className="page-sidebar-grid">
 
           {/* Sommaire sticky */}
-          {!isMobile && (
+          {!isNarrow && (
             <div style={{ position: 'sticky', top: '90px' }}>
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '24px' }}>
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
@@ -388,14 +392,20 @@ export default function PolitiqueConfidentialitePage() {
                   if (bloc.type === 'tableau' && bloc.lignes) {
                     return (
                       <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #E8E4DC', marginBottom: '16px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', backgroundColor: '#0A3D2E', padding: '12px 16px' }}>
-                          <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px' }}>Type de données</span>
-                          <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px' }}>Durée de conservation</span>
-                        </div>
+                        {!isMobile && (
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', backgroundColor: '#0A3D2E', padding: '12px 16px' }}>
+                            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px' }}>Type de données</span>
+                            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px' }}>Durée de conservation</span>
+                          </div>
+                        )}
                         {bloc.lignes.map((ligne, j) => (
-                          <div key={j} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '12px 16px', backgroundColor: j % 2 === 0 ? '#FFFFFF' : '#F8F6F1', borderTop: '1px solid #E8E4DC' }}>
-                            <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#1C1C1C', fontWeight: '500' }}>{ligne.type}</span>
-                            <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#6A6A6A' }}>{ligne.duree}</span>
+                          <div key={j} style={{
+                            display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+                            padding: '12px 16px', backgroundColor: j % 2 === 0 ? '#FFFFFF' : '#F8F6F1',
+                            borderTop: '1px solid #E8E4DC', gap: isMobile ? '4px' : '0',
+                          }}>
+                            <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#1C1C1C', fontWeight: '600', flex: isMobile ? 'none' : '1' }}>{ligne.type}</span>
+                            <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '14px', color: '#6A6A6A', flex: isMobile ? 'none' : '1' }}>{ligne.duree}</span>
                           </div>
                         ))}
                       </div>
@@ -421,12 +431,13 @@ export default function PolitiqueConfidentialitePage() {
                       <div key={i} style={{ backgroundColor: '#F8F6F1', borderRadius: '10px', padding: '20px', border: '1px solid #E8E4DC' }}>
                         {bloc.items.map((item, j) => (
                           <div key={j} style={{
-                            display: 'flex', gap: '12px', alignItems: 'flex-start',
+                            display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+                            gap: isMobile ? '4px' : '12px', alignItems: 'flex-start',
                             paddingBottom: j < bloc.items!.length - 1 ? '12px' : '0',
                             marginBottom: j < bloc.items!.length - 1 ? '12px' : '0',
                             borderBottom: j < bloc.items!.length - 1 ? '1px solid #E8E4DC' : 'none',
                           }}>
-                            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', minWidth: '80px', paddingTop: '2px' }}>
+                            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '0.5px', minWidth: isMobile ? 'auto' : '80px', paddingTop: '2px' }}>
                               {item.label}
                             </span>
                             <span style={{ fontFamily: 'Source Sans 3, sans-serif', fontSize: '15px', color: '#1C1C1C', flex: 1 }}>
@@ -444,7 +455,7 @@ export default function PolitiqueConfidentialitePage() {
             ))}
 
             {/* Voir aussi — mobile uniquement */}
-            {isMobile && (
+            {isNarrow && (
               <div style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
                 <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
