@@ -124,7 +124,7 @@ function LienCard({ lien }: { lien: Lien }) {
 
 export default function SectionLiensUtiles() {
   return (
-    <section style={{ backgroundColor: '#F8F6F1', padding: '80px 40px' }}>
+    <section id="liens-utiles" style={{ backgroundColor: '#F8F6F1', padding: '80px 40px' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
         {/* En-tete */}

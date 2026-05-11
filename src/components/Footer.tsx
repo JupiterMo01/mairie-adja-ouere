@@ -59,6 +59,7 @@ export default function Footer() {
     { label: 'Les sites touristiques', href: '/presentation/sites-touristiques'},
     { label: 'Nos marchés', href: '/presentation/marches' },
     { label: 'Nos gares routières', href: '/presentation/gares' },
+    { label: 'Liens utiles', href: '/#liens-utiles' },
     { label: 'Foire aux questions', href: '/faq' },
     { label: 'Contact', href: '/contact' },
   ]
@@ -195,6 +196,9 @@ export default function Footer() {
           border-radius: 2px;
           overflow: hidden;
           margin: 5px 0;
+        }
+        @media (max-width: 1100px) and (min-width: 768px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
         @media (max-width: 767px) {
           .footer-wrap { padding: 60px 24px 24px; }
