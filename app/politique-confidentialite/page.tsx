@@ -247,7 +247,7 @@ export default function PolitiqueConfidentialitePage() {
     <main style={{ backgroundColor: '#F8F6F1' }}>
 
       {/* Hero */}
-      <section style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '60px 24px 48px' : '80px 40px 64px', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-hero-section" style={{ backgroundColor: '#0A3D2E', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '300px', height: '300px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.1)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
@@ -267,9 +267,9 @@ export default function PolitiqueConfidentialitePage() {
       </section>
 
       {/* Résumé rapide */}
-      <section style={{ backgroundColor: '#FFFFFF', padding: isMobile ? '32px 24px' : '40px 40px', borderBottom: '1px solid #E8E4DC' }}>
+      <section className="page-resume-section" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E8E4DC' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: '16px' }}>
+          <div className="page-stats-grid">
             {[
               { icon: '🔒', titre: 'Données protégées', desc: 'Chiffrement SSL et accès restreint' },
               { icon: '🚫', titre: 'Pas de revente', desc: 'Vos données ne sont jamais vendues' },
@@ -287,12 +287,11 @@ export default function PolitiqueConfidentialitePage() {
       </section>
 
       {/* Contenu */}
-      <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '260px 1fr', gap: '48px', alignItems: 'start' }}>
+      <section className="page-content-section">
+        <div className="page-sidebar-grid">
 
           {/* Sommaire sticky */}
-          {!isMobile && (
-            <div style={{ position: 'sticky', top: '90px' }}>
+          <div className="page-sidebar-col" style={{ position: 'sticky', top: '90px' }}>
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '24px' }}>
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
                   Sommaire
@@ -327,8 +326,7 @@ export default function PolitiqueConfidentialitePage() {
                   Nous contacter →
                 </Link>
               </div>
-            </div>
-          )}
+          </div>
 
           {/* Sections */}
           <div>
@@ -338,7 +336,7 @@ export default function PolitiqueConfidentialitePage() {
                   backgroundColor: '#FFFFFF',
                   borderRadius: '16px',
                   border: '1px solid #E8E4DC',
-                  padding: isMobile ? '24px' : '36px',
+                  padding: '36px',
                   marginBottom: idx < sections.length - 1 ? '24px' : '0',
                   scrollMarginTop: '100px',
                 }}
@@ -404,7 +402,7 @@ export default function PolitiqueConfidentialitePage() {
 
                   if (bloc.type === 'droits' && bloc.items) {
                     return (
-                      <div key={i} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+                      <div key={i} className="page-droits-grid" style={{ marginBottom: '16px' }}>
                         {bloc.items.map((item, j) => (
                           <div key={j} style={{ padding: '16px', backgroundColor: '#F8F6F1', borderRadius: '10px', border: '1px solid #E8E4DC' }}>
                             <div style={{ fontSize: '22px', marginBottom: '8px' }}>{item.icon}</div>
@@ -444,20 +442,18 @@ export default function PolitiqueConfidentialitePage() {
             ))}
 
             {/* Voir aussi — mobile uniquement */}
-            {isMobile && (
-              <div style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
-                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
-                <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                  Mentions légales →
-                </Link>
-                <Link href="/politique-cookies" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                  Politique des cookies →
-                </Link>
-                <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
-                  Nous contacter →
-                </Link>
-              </div>
-            )}
+            <div className="page-voir-aussi-mobile" style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
+              <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
+                Mentions légales →
+              </Link>
+              <Link href="/politique-cookies" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
+                Politique des cookies →
+              </Link>
+              <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
+                Nous contacter →
+              </Link>
+            </div>
 
             {/* Lien vers mentions légales */}
             <div style={{ marginTop: '32px', padding: '24px', backgroundColor: '#0A3D2E', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
