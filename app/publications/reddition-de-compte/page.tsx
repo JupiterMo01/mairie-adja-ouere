@@ -223,7 +223,7 @@ export default function RedditionDeComptePage() {
               boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
             }}>
               {/* Header */}
-              <div style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '24px' : '28px 36px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ backgroundColor: '#0A3D2E', padding: isMobile ? '20px' : '28px 36px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
                     <span style={{ backgroundColor: r.type === 'Annuelle' ? '#C9A84C' : 'rgba(201,168,76,0.4)', color: r.type === 'Annuelle' ? '#0A3D2E' : '#C9A84C', fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', padding: '3px 12px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '1px' }}>
@@ -233,7 +233,7 @@ export default function RedditionDeComptePage() {
                       📅 {r.date}
                     </span>
                   </div>
-                  <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: isMobile ? '22px' : '28px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 6px 0', lineHeight: '1.2' }}>
+                  <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: isMobile ? '20px' : '28px', fontWeight: '700', color: '#FFFFFF', margin: '0 0 6px 0', lineHeight: '1.2' }}>
                     {r.titre}
                   </h2>
                   <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
@@ -241,16 +241,15 @@ export default function RedditionDeComptePage() {
                   </p>
                 </div>
                 {/* Boutons téléchargement */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'auto auto', gap: '8px', justifyContent: 'start' }}>
                   <a
                     href={r.rapport.url}
                     download
                     style={{
-                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                       backgroundColor: '#C9A84C', color: '#0A3D2E',
                       fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700',
                       padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
-                      whiteSpace: 'nowrap',
                     }}
                   >
                     ⬇ Télécharger le rapport
@@ -259,11 +258,11 @@ export default function RedditionDeComptePage() {
                     href={r.documentReddition.url}
                     download
                     style={{
-                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                       backgroundColor: 'rgba(201,168,76,0.18)', color: '#C9A84C',
                       fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700',
                       padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
-                      whiteSpace: 'nowrap', border: '1px solid rgba(201,168,76,0.4)',
+                      border: '1px solid rgba(201,168,76,0.4)',
                     }}
                   >
                     ⬇ Document de reddition
@@ -296,17 +295,17 @@ export default function RedditionDeComptePage() {
                 <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '28px' }}>
 
                   {/* Deux fichiers */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: 0 }}>
                     {[
                       { ...r.rapport, label: 'Rapport' },
                       { ...r.documentReddition, label: 'Document de reddition' },
                     ].map((fichier, idx) => (
-                      <div key={idx} style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '16px 20px', border: '1px solid #E8E4DC', display: 'flex', alignItems: 'center', gap: '14px' }}>
-                        <div style={{ width: '44px', height: '44px', backgroundColor: '#0A3D2E', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0 }}>
+                      <div key={idx} style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '14px 16px', border: '1px solid #E8E4DC', display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                        <div style={{ width: '40px', height: '40px', backgroundColor: '#0A3D2E', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>
                           📄
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '2px' }}>
+                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '2px' }}>
                             {fichier.label}
                           </div>
                           <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', color: '#0A3D2E', marginBottom: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -317,10 +316,10 @@ export default function RedditionDeComptePage() {
                           </div>
                         </div>
                         <a href={fichier.url} download style={{
-                          display: 'inline-flex', alignItems: 'center', gap: '5px',
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                           backgroundColor: '#0A3D2E', color: '#FFFFFF',
-                          fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600',
-                          padding: '7px 12px', borderRadius: '6px', textDecoration: 'none',
+                          fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
+                          width: '36px', height: '36px', borderRadius: '8px', textDecoration: 'none',
                           flexShrink: 0,
                         }}>
                           ⬇
@@ -330,7 +329,7 @@ export default function RedditionDeComptePage() {
                   </div>
 
                   {/* Galerie photos */}
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       Photos de la séance
                       <span style={{ backgroundColor: '#E8E4DC', borderRadius: '10px', padding: '1px 8px', fontSize: '10px', color: '#6A6A6A' }}>
@@ -339,7 +338,7 @@ export default function RedditionDeComptePage() {
                     </div>
                     <div style={{
                       display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))',
+                      gridTemplateColumns: isMobile ? 'repeat(3, 1fr)' : 'repeat(auto-fill, minmax(90px, 1fr))',
                       gap: '8px',
                     }}>
                       {r.photos.map((photo, i) => (
@@ -496,6 +495,8 @@ export default function RedditionDeComptePage() {
   )
 }
 
+const MAX_VISIBLE = 6
+
 function PhotoThumb({ photo, index, total, onClick }: {
   photo: { url: string; legende: string }
   index: number
@@ -503,7 +504,10 @@ function PhotoThumb({ photo, index, total, onClick }: {
   onClick: () => void
 }) {
   const [hovered, setHovered] = React.useState(false)
-  const isOverlay = index === 3 && total > 4
+  const hidden = index >= MAX_VISIBLE
+  const isOverlay = index === MAX_VISIBLE - 1 && total > MAX_VISIBLE
+
+  if (hidden) return null
 
   return (
     <div
@@ -516,7 +520,6 @@ function PhotoThumb({ photo, index, total, onClick }: {
         overflow: 'hidden',
         cursor: 'pointer',
         position: 'relative',
-        display: index >= 4 && total > 4 ? 'none' : 'block',
       }}
     >
       <img
@@ -530,25 +533,27 @@ function PhotoThumb({ photo, index, total, onClick }: {
         }}
       />
       {/* Overlay hover */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundColor: 'rgba(10,61,46,0.45)',
-        opacity: hovered ? 1 : 0,
-        transition: 'opacity 0.2s ease',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <span style={{ color: '#FFFFFF', fontSize: '18px' }}>🔍</span>
-      </div>
-      {/* +N overlay sur la 4ème photo si > 4 */}
+      {!isOverlay && (
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundColor: 'rgba(10,61,46,0.45)',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.2s ease',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <span style={{ color: '#FFFFFF', fontSize: '18px' }}>🔍</span>
+        </div>
+      )}
+      {/* +N overlay sur la dernière miniature visible si plus de photos */}
       {isOverlay && (
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundColor: 'rgba(10,61,46,0.72)',
+          backgroundColor: 'rgba(10,61,46,0.75)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexDirection: 'column', gap: '2px',
         }}>
           <span style={{ color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '20px', fontWeight: '700' }}>
-            +{total - 3}
+            +{total - (MAX_VISIBLE - 1)}
           </span>
           <span style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Outfit, sans-serif', fontSize: '10px' }}>
             photos
