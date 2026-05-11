@@ -12,7 +12,6 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
       style={{
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #E8E4DC',
-        padding: '10px 40px',
       }}
     >
       <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
@@ -42,12 +41,6 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
           )
         })}
       </div>
-
-      <style>{`
-        @media (max-width: 767px) {
-          nav[aria-label="Fil d'Ariane"] { padding: 8px 20px; }
-        }
-      `}</style>
     </nav>
   )
 }

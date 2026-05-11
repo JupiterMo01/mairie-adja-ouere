@@ -26,6 +26,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Breadcrumb responsive padding */
+nav[aria-label="Fil d'Ariane"] { padding: 10px 40px; }
+@media (max-width: 767px) {
+  nav[aria-label="Fil d'Ariane"] { padding: 8px 20px; }
+}
+
 /* Responsive section padding */
 @media (max-width: 768px) {
   section {

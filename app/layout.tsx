@@ -30,7 +30,7 @@ export default function RootLayout({
         margin: 0,
         padding: 0,
         backgroundColor: '#F8F6F1',
-        paddingTop: '74px',
+        paddingTop: '96px',
         overflowX: 'clip',
       }}>
         <SkipLink />

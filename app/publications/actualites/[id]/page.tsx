@@ -168,23 +168,6 @@ export default function ActualiteDetailPage() {
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to bottom, rgba(10,61,46,0.3) 0%, rgba(10,61,46,0.8) 100%)',
         }} />
-        {/* Fil d'ariane */}
-        <div style={{
-          position: 'absolute', top: '24px', left: isMobile ? '24px' : '40px',
-          display: 'flex', alignItems: 'center', gap: '8px',
-        }}>
-          <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>
-            Accueil
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.4)' }}>›</span>
-          <Link href="/publications/actualites" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>
-            Actualités
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.4)' }}>›</span>
-          <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#C9A84C' }}>
-            {actu.categorie}
-          </span>
-        </div>
         {/* Titre sur image */}
         <div style={{
           position: 'absolute', bottom: '40px',
