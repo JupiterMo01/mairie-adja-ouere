@@ -190,7 +190,8 @@ export default function MentionsLegalesPage() {
         <div className="page-sidebar-grid">
 
           {/* Sommaire — sticky desktop */}
-          <div className="page-sidebar-col" style={{ position: 'sticky', top: '90px' }}>
+          {!isMobile && (
+            <div style={{ position: 'sticky', top: '90px' }}>
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '24px', overflow: 'hidden' }}>
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
                   Sommaire
@@ -227,7 +228,8 @@ export default function MentionsLegalesPage() {
                   Nous contacter →
                 </Link>
               </div>
-          </div>
+            </div>
+          )}
 
           {/* Corps du document */}
           <div>
@@ -280,18 +282,20 @@ export default function MentionsLegalesPage() {
             ))}
 
             {/* Voir aussi — mobile uniquement */}
-            <div className="page-voir-aussi-mobile" style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
-              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
-              <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                Politique de confidentialité →
-              </Link>
-              <Link href="/politique-cookies" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
-                Politique des cookies →
-              </Link>
-              <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
-                Nous contacter →
-              </Link>
-            </div>
+            {isMobile && (
+              <div style={{ marginTop: '24px', backgroundColor: 'rgba(10,61,46,0.06)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(10,61,46,0.12)' }}>
+                <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600', color: '#0A3D2E', marginBottom: '10px' }}>📄 Voir aussi</div>
+                <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
+                  Politique de confidentialité →
+                </Link>
+                <Link href="/politique-cookies" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', marginBottom: '8px', fontWeight: '500' }}>
+                  Politique des cookies →
+                </Link>
+                <Link href="/contact" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
+                  Nous contacter →
+                </Link>
+              </div>
+            )}
 
             {/* Lien vers politique */}
             <div style={{ marginTop: '32px', padding: '24px', backgroundColor: '#0A3D2E', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>

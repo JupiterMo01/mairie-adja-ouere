@@ -56,7 +56,6 @@ body {
 }
 .page-sidebar-col { display: block; }
 .page-card-padding { padding: 36px; }
-.page-voir-aussi-mobile { display: none !important; }
 .page-resume-section { padding: 40px 40px; }
 .page-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .page-droits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -65,9 +64,6 @@ body {
   .page-hero-section { padding: 60px 24px 48px; }
   .page-content-section { padding: 40px 24px; }
   .page-sidebar-grid { grid-template-columns: 1fr; gap: 0; }
-  .page-sidebar-col { display: none !important; }
-  .page-card-padding { padding: 24px; }
-  .page-voir-aussi-mobile { display: block !important; }
   .page-resume-section { padding: 32px 24px; }
   .page-stats-grid { grid-template-columns: 1fr 1fr; }
   .page-droits-grid { grid-template-columns: 1fr; }
