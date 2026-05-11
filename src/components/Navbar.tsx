@@ -219,20 +219,33 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px' }}>
+            {/* Armoirie */}
             <img
-              src="/logo.jpeg"
-              alt="Commune d'Adja-Ouère"
-              style={{ width: '44px', height: '44px', objectFit: 'contain', flexShrink: 0 }}
+              src="/armoirie.png"
+              alt="Armoirie du Bénin"
+              style={{ width: isMobile ? '42px' : '56px', height: isMobile ? '42px' : '56px', objectFit: 'contain', flexShrink: 0 }}
             />
+            {/* Bloc texte */}
             <div>
-              <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '15px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '0.3px', lineHeight: '1.2' }}>
-                Commune d&apos;Adja-Ouère
-              </div>
-              <div className="nav-logo-sub" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: isMobile ? '9px' : '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
                 République du Bénin
               </div>
+              <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: '4px 0' }}>
+                <div style={{ flex: 1, backgroundColor: '#008751' }} />
+                <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
+                <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
+              </div>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: isMobile ? '9px' : '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+                Commune d&apos;Adja-Ouèrè
+              </div>
             </div>
+            {/* Logo commune */}
+            <img
+              src="/logo.jpeg"
+              alt="Logo Commune d'Adja-Ouèrè"
+              style={{ width: isMobile ? '46px' : '62px', height: isMobile ? '46px' : '62px', objectFit: 'contain', flexShrink: 0 }}
+            />
           </div>
         </Link>
 

@@ -191,32 +191,48 @@ export default function Footer() {
               gap: '12px',
               marginBottom: '20px',
             }}>
+              {/* Armoirie */}
               <img
-                src="/logo.jpeg"
-                alt="Commune d'Adja-Ouère"
-                style={{ width: '52px', height: '52px', objectFit: 'contain', flexShrink: 0 }}
+                src="/armoirie.png"
+                alt="Armoirie du Bénin"
+                style={{ width: '64px', height: '64px', objectFit: 'contain', flexShrink: 0 }}
               />
+              {/* Bloc texte */}
               <div>
                 <div style={{
-                  fontFamily: 'Cormorant Garamond, serif',
-                  fontSize: '18px',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: '12px',
                   fontWeight: '700',
                   color: '#FFFFFF',
-                  lineHeight: 1.2,
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  lineHeight: 1.3,
                 }}>
-                  Commune d'Adja-Ouere
+                  République du Bénin
+                </div>
+                <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: '5px 0' }}>
+                  <div style={{ flex: 1, backgroundColor: '#008751' }} />
+                  <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
+                  <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
                 </div>
                 <div style={{
                   fontFamily: 'Outfit, sans-serif',
-                  fontSize: '11px',
-                  color: '#C9A84C',
-                  letterSpacing: '1px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  color: '#FFFFFF',
+                  letterSpacing: '2px',
                   textTransform: 'uppercase',
-                  marginTop: '2px',
+                  lineHeight: 1.3,
                 }}>
-                  Departement du Plateau — Benin
+                  Commune d&apos;Adja-Ouèrè
                 </div>
               </div>
+              {/* Logo commune */}
+              <img
+                src="/logo.jpeg"
+                alt="Logo Commune d'Adja-Ouèrè"
+                style={{ width: '72px', height: '72px', objectFit: 'contain', flexShrink: 0 }}
+              />
             </div>
 
             <p style={{
