@@ -152,18 +152,6 @@ export default function ActualiteDetailPage() {
 
   return (
     <main style={{ backgroundColor: '#F8F6F1' }}>
-      <style>{`
-        .actu-content-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: 60px;
-          align-items: start;
-        }
-        @media (max-width: 768px) {
-          .actu-content-grid { grid-template-columns: 1fr; gap: 40px; }
-          .actu-sidebar { display: none; }
-        }
-      `}</style>
 
       {/* Image hero */}
       <div style={{
@@ -310,7 +298,7 @@ export default function ActualiteDetailPage() {
                         }}>
                           {fichier.type === 'PDF' ? '📄' : fichier.type === 'Excel' ? '📊' : '📁'}
                         </div>
-                        <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
                           <div style={{
                             fontFamily: 'Outfit, sans-serif', fontSize: '14px',
                             fontWeight: '600', color: '#1C1C1C',
@@ -322,7 +310,7 @@ export default function ActualiteDetailPage() {
                             {fichier.type} · {fichier.taille}
                           </div>
                         </div>
-                        <div style={{
+                        <div className="actu-fichier-btn" style={{
                           flexShrink: 0, backgroundColor: '#0A3D2E', color: '#FFFFFF',
                           fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600',
                           padding: '6px 14px', borderRadius: '20px',

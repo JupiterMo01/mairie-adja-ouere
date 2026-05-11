@@ -227,26 +227,28 @@ export default function MentionsLegalesPage() {
               </div>
             ))}
 
-            {/* Lien vers politique */}
+            {/* Documents liés */}
             <div style={{ marginTop: '32px', padding: '24px', backgroundColor: '#0A3D2E', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '600', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
-                  Document lié
+                  Documents liés
                 </div>
                 <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '20px', fontWeight: '700', color: '#FFFFFF' }}>
-                  Politique de confidentialité
+                  Informations légales
                 </div>
               </div>
-              <Link href="/politique-confidentialite" style={{ textDecoration: 'none' }}>
-                <button style={{
-                  padding: '11px 22px', borderRadius: '8px',
-                  backgroundColor: '#C9A84C', color: '#0A3D2E',
-                  fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700',
-                  border: 'none', cursor: 'pointer',
-                }}>
-                  Consulter →
-                </button>
-              </Link>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Link href="/politique-confidentialite" style={{ textDecoration: 'none' }}>
+                  <button style={{ padding: '11px 22px', borderRadius: '8px', backgroundColor: '#C9A84C', color: '#0A3D2E', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700', border: 'none', cursor: 'pointer' }}>
+                    Confidentialité →
+                  </button>
+                </Link>
+                <Link href="/politique-cookies" style={{ textDecoration: 'none' }}>
+                  <button style={{ padding: '11px 22px', borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.15)', color: '#FFFFFF', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: '700', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer' }}>
+                    Cookies →
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

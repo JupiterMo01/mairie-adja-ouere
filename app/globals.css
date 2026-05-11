@@ -59,3 +59,17 @@ body {
 @media (max-width: 1023px) {
   .page-sidebar-grid { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* Grille page détail actualités */
+.actu-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .actu-content-grid { grid-template-columns: 1fr; gap: 40px; }
+  .actu-sidebar { display: none !important; }
+  .actu-fichier-btn { display: none !important; }
+}
