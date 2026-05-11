@@ -45,21 +45,21 @@ function getLabel(seg: string, path: string): string {
 export default function AutoBreadcrumb() {
   const pathname = usePathname()
 
-  if (pathname === '/') return null
-
   const segments = pathname.split('/').filter(Boolean)
 
-  const items = [
-    { label: 'Accueil', href: '/' },
-    ...segments
-      .map((seg, idx) => ({
-        seg,
-        label: getLabel(seg, pathname),
-        href: '/' + segments.slice(0, idx + 1).join('/'),
-      }))
-      .filter(item => !/^\d+$/.test(item.seg))
-      .map(({ label, href }) => ({ label, href })),
-  ]
+  const items = pathname === '/'
+    ? [{ label: 'Accueil', href: '/' }, { label: 'Accueil', href: '/' }]
+    : [
+        { label: 'Accueil', href: '/' },
+        ...segments
+          .map((seg, idx) => ({
+            seg,
+            label: getLabel(seg, pathname),
+            href: '/' + segments.slice(0, idx + 1).join('/'),
+          }))
+          .filter(item => !/^\d+$/.test(item.seg))
+          .map(({ label, href }) => ({ label, href })),
+      ]
 
   return (
     <nav aria-label="Fil d'Ariane">
