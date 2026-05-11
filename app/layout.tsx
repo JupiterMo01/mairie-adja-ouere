@@ -31,6 +31,7 @@ export default function RootLayout({
         padding: 0,
         backgroundColor: '#F8F6F1',
         paddingTop: '74px',
+        overflowX: 'hidden',
       }}>
         <SkipLink />
         <Navbar />

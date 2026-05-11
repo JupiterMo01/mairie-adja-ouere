@@ -39,15 +39,6 @@ function SocialBtn({ social }: { social: Social }) {
 }
 
 export default function Footer() {
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
   const annee = new Date().getFullYear()
 
   const linkStyle = {
@@ -169,213 +160,226 @@ export default function Footer() {
   ]
 
   return (
-    <footer style={{
-      backgroundColor: '#071F17',
-      padding: isMobile ? '60px 24px 24px' : '80px 40px 32px',
-    }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <>
+      <style>{`
+        .footer-wrap {
+          background-color: #071F17;
+          padding: 80px 40px 32px;
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
+          gap: 60px;
+          margin-bottom: 60px;
+        }
+        .footer-logo-block {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+        .footer-armoirie { width: 64px; height: 64px; }
+        .footer-logo-img { width: 72px; height: 72px; }
+        .footer-text-line {
+          font-family: Outfit, sans-serif;
+          font-size: 12px;
+          font-weight: 700;
+          color: #FFFFFF;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          line-height: 1.3;
+        }
+        .footer-flag-bar {
+          display: flex;
+          height: 3px;
+          border-radius: 2px;
+          overflow: hidden;
+          margin: 5px 0;
+        }
+        @media (max-width: 767px) {
+          .footer-wrap { padding: 60px 24px 24px; }
+          .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+          .footer-logo-block { gap: 8px; }
+          .footer-armoirie { width: 44px; height: 44px; }
+          .footer-logo-img { width: 40px; height: 40px; }
+          .footer-text-line { font-size: 9px; letter-spacing: 0.5px; }
+          .footer-flag-bar { height: 3px; margin: 3px 0; }
+        }
+      `}</style>
+      <footer className="footer-wrap">
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
-        {/* Grille principale */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr',
-          gap: isMobile ? '40px' : '60px',
-          marginBottom: '60px',
-        }}>
+          {/* Grille principale */}
+          <div className="footer-grid">
 
-          {/* Colonne 1 — Logo + description + réseaux */}
-          <div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: isMobile ? '8px' : '12px',
-              marginBottom: '20px',
-            }}>
-              {/* Armoirie */}
-              <img
-                src="/armoirie.png"
-                alt="Armoirie du Bénin"
-                style={{ width: isMobile ? '44px' : '64px', height: isMobile ? '44px' : '64px', objectFit: 'contain', flexShrink: 0 }}
-              />
-              {/* Bloc texte */}
-              <div style={{ whiteSpace: 'nowrap' }}>
-                <div style={{
-                  fontFamily: 'Outfit, sans-serif',
-                  fontSize: isMobile ? '9px' : '12px',
-                  fontWeight: '700',
-                  color: '#FFFFFF',
-                  letterSpacing: isMobile ? '0.5px' : '2px',
-                  textTransform: 'uppercase',
-                  lineHeight: 1.3,
-                }}>
-                  République du Bénin
+            {/* Colonne 1 — Logo + description + réseaux */}
+            <div>
+              <div className="footer-logo-block">
+                <img
+                  src="/armoirie.png"
+                  alt="Armoirie du Bénin"
+                  className="footer-armoirie"
+                  style={{ objectFit: 'contain', flexShrink: 0 }}
+                />
+                <div style={{ whiteSpace: 'nowrap' }}>
+                  <div className="footer-text-line">République du Bénin</div>
+                  <div className="footer-flag-bar">
+                    <div style={{ flex: 1, backgroundColor: '#008751' }} />
+                    <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
+                    <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
+                  </div>
+                  <div className="footer-text-line">Commune d&apos;Adja-Ouèrè</div>
                 </div>
-                <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: isMobile ? '3px 0' : '5px 0' }}>
-                  <div style={{ flex: 1, backgroundColor: '#008751' }} />
-                  <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
-                  <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
-                </div>
-                <div style={{
-                  fontFamily: 'Outfit, sans-serif',
-                  fontSize: isMobile ? '9px' : '12px',
-                  fontWeight: '700',
-                  color: '#FFFFFF',
-                  letterSpacing: isMobile ? '0.5px' : '2px',
-                  textTransform: 'uppercase',
-                  lineHeight: 1.3,
-                }}>
-                  Commune d&apos;Adja-Ouèrè
-                </div>
+                <img
+                  src="/logo.jpeg"
+                  alt="Logo Commune d'Adja-Ouèrè"
+                  className="footer-logo-img"
+                  style={{ objectFit: 'contain', flexShrink: 0 }}
+                />
               </div>
-              {/* Logo commune */}
-              <img
-                src="/logo.jpeg"
-                alt="Logo Commune d'Adja-Ouèrè"
-                style={{ width: isMobile ? '40px' : '72px', height: isMobile ? '40px' : '72px', objectFit: 'contain', flexShrink: 0 }}
-              />
+
+              <p style={{
+                fontFamily: 'Source Sans 3, sans-serif',
+                fontSize: '14px',
+                lineHeight: '1.7',
+                color: 'rgba(255,255,255,0.55)',
+                margin: '0 0 24px 0',
+                maxWidth: '320px',
+              }}>
+                La Commune d'Adja-Ouere s'engage pour le developpement local, la bonne gouvernance et l'amelioration du cadre de vie de ses populations.
+              </p>
+
+              {/* Réseaux sociaux */}
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                {sociaux.map((social) => (
+                  <SocialBtn key={social.title} social={social} />
+                ))}
+              </div>
             </div>
 
-            <p style={{
-              fontFamily: 'Source Sans 3, sans-serif',
-              fontSize: '14px',
-              lineHeight: '1.7',
-              color: 'rgba(255,255,255,0.55)',
-              margin: '0 0 24px 0',
-              maxWidth: '320px',
-            }}>
-              La Commune d'Adja-Ouere s'engage pour le developpement local, la bonne gouvernance et l'amelioration du cadre de vie de ses populations.
-            </p>
+            {/* Colonne 2 — Navigation */}
+            <div>
+              <div style={{
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: '12px',
+                fontWeight: '700',
+                color: '#C9A84C',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: '20px',
+              }}>
+                Navigation
+              </div>
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  style={linkStyle}
+                  onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
 
-            {/* Réseaux sociaux */}
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              {sociaux.map((social) => (
-                <SocialBtn key={social.title} social={social} />
+            {/* Colonne 3 — Publications */}
+            <div>
+              <div style={{
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: '12px',
+                fontWeight: '700',
+                color: '#C9A84C',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: '20px',
+              }}>
+                Publications
+              </div>
+              {publications.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  style={linkStyle}
+                  onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Colonne 4 — Opportunites */}
+            <div>
+              <div style={{
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: '12px',
+                fontWeight: '700',
+                color: '#C9A84C',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: '20px',
+              }}>
+                Opportunites
+              </div>
+              {opportunites.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  style={linkStyle}
+                  onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+                >
+                  {item.label}
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Colonne 2 — Navigation */}
-          <div>
-            <div style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontSize: '12px',
-              fontWeight: '700',
-              color: '#C9A84C',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              marginBottom: '20px',
-            }}>
-              Navigation
-            </div>
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={linkStyle}
-                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Colonne 3 — Publications */}
-          <div>
-            <div style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontSize: '12px',
-              fontWeight: '700',
-              color: '#C9A84C',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              marginBottom: '20px',
-            }}>
-              Publications
-            </div>
-            {publications.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={linkStyle}
-                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Colonne 4 — Opportunites */}
-          <div>
-            <div style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontSize: '12px',
-              fontWeight: '700',
-              color: '#C9A84C',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              marginBottom: '20px',
-            }}>
-              Opportunites
-            </div>
-            {opportunites.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={linkStyle}
-                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Séparateur */}
-        <div style={{
-          height: '1px',
-          backgroundColor: 'rgba(255,255,255,0.08)',
-          marginBottom: '28px',
-        }} />
-
-        {/* Bas du footer */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '16px',
-        }}>
+          {/* Séparateur */}
           <div style={{
-            fontFamily: 'Outfit, sans-serif',
-            fontSize: '13px',
-            color: 'rgba(255,255,255,0.4)',
+            height: '1px',
+            backgroundColor: 'rgba(255,255,255,0.08)',
+            marginBottom: '28px',
+          }} />
+
+          {/* Bas du footer */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '16px',
           }}>
-            © {annee} Commune d'Adja-Ouere. Tous droits reserves.
-          </div>
-          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-            {mentions.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  fontFamily: 'Outfit, sans-serif',
-                  fontSize: '13px',
-                  color: 'rgba(255,255,255,0.4)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <div style={{
+              fontFamily: 'Outfit, sans-serif',
+              fontSize: '13px',
+              color: 'rgba(255,255,255,0.4)',
+            }}>
+              © {annee} Commune d'Adja-Ouere. Tous droits reserves.
+            </div>
+            <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+              {mentions.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  style={{
+                    fontFamily: 'Outfit, sans-serif',
+                    fontSize: '13px',
+                    color: 'rgba(255,255,255,0.4)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s ease',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }

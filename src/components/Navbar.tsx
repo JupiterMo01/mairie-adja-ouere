@@ -101,7 +101,6 @@ function NavItem({ item }: NavItemProps) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -111,14 +110,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  // Ferme le menu mobile à chaque changement de page
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
   const navItems = [
@@ -213,104 +204,92 @@ export default function Navbar() {
       transition: 'padding 0.3s ease',
       padding: scrolled ? '10px 0' : '16px 0',
     }}>
-      <div
-        className="nav-inner"
-        style={{ maxWidth: '1400px', margin: '0 auto', padding: isMobile ? '0 16px' : '0 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
-      >
+      <div className="nav-inner">
         {/* Logo */}
         <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '7px' : '11px' }}>
-            {/* Armoirie */}
+          <div className="nav-logo-container" style={{ display: 'flex', alignItems: 'center' }}>
             <img
               src="/armoirie.png"
               alt="Armoirie du Bénin"
-              style={{ width: isMobile ? '34px' : '56px', height: isMobile ? '34px' : '56px', objectFit: 'contain', flexShrink: 0 }}
+              className="nav-armoirie"
+              style={{ objectFit: 'contain', flexShrink: 0 }}
             />
-            {/* Bloc texte */}
             <div style={{ whiteSpace: 'nowrap' }}>
-              <div style={{
+              <div className="nav-text-line" style={{
                 fontFamily: 'Outfit, sans-serif',
-                fontSize: isMobile ? '7.5px' : '11px',
                 fontWeight: '700',
                 color: '#FFFFFF',
-                letterSpacing: isMobile ? '0.5px' : '2px',
                 textTransform: 'uppercase',
                 lineHeight: 1.3,
               }}>
                 République du Bénin
               </div>
-              <div style={{ display: 'flex', height: isMobile ? '2px' : '3px', borderRadius: '2px', overflow: 'hidden', margin: isMobile ? '3px 0' : '4px 0' }}>
+              <div className="nav-flag-bar" style={{ display: 'flex', borderRadius: '2px', overflow: 'hidden' }}>
                 <div style={{ flex: 1, backgroundColor: '#008751' }} />
                 <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
                 <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
               </div>
-              <div style={{
+              <div className="nav-text-line" style={{
                 fontFamily: 'Outfit, sans-serif',
-                fontSize: isMobile ? '7.5px' : '11px',
                 fontWeight: '700',
                 color: '#FFFFFF',
-                letterSpacing: isMobile ? '0.5px' : '2px',
                 textTransform: 'uppercase',
                 lineHeight: 1.3,
               }}>
                 Commune d&apos;Adja-Ouèrè
               </div>
             </div>
-            {/* Logo commune */}
             <img
               src="/logo.jpeg"
               alt="Logo Commune d'Adja-Ouèrè"
-              style={{ width: isMobile ? '34px' : '62px', height: isMobile ? '34px' : '62px', objectFit: 'contain', flexShrink: 0 }}
+              className="nav-logo-img"
+              style={{ objectFit: 'contain', flexShrink: 0 }}
             />
           </div>
         </Link>
 
-        {/* Menu Desktop */}
-        {!isMobile && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-            {navItems.map((item) => <NavItem key={item.href} item={item} />)}
-          </div>
-        )}
+        {/* Menu Desktop — masqué sur mobile via CSS */}
+        <div className="nav-desktop-menu">
+          {navItems.map((item) => <NavItem key={item.href} item={item} />)}
+        </div>
 
         {/* Droite : Don (desktop) + Burger (mobile) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          {!isMobile && (
-            <Link
-              href="/don"
-              style={{
-                fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
-                color: '#0A3D2E', textDecoration: 'none', padding: '9px 18px',
-                backgroundColor: '#C9A84C', borderRadius: '6px', whiteSpace: 'nowrap', transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#B8973B'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.transform = 'translateY(0)' }}
-            >
-              Faire un don
-            </Link>
-          )}
+          <Link
+            href="/don"
+            className="nav-desktop-don"
+            style={{
+              fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600',
+              color: '#0A3D2E', textDecoration: 'none', padding: '9px 18px',
+              backgroundColor: '#C9A84C', borderRadius: '6px', whiteSpace: 'nowrap',
+              transition: 'all 0.2s ease', alignItems: 'center',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#B8973B'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+            onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#C9A84C'; e.currentTarget.style.transform = 'translateY(0)' }}
+          >
+            Faire un don
+          </Link>
 
-          {isMobile && (
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Menu"
-              style={{
-                background: 'none',
-                border: '1px solid rgba(255,255,255,0.25)',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                padding: '8px 10px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '5px',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
-              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-              <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
-            </button>
-          )}
+          <button
+            className="nav-burger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+            style={{
+              background: 'none',
+              border: '1px solid rgba(255,255,255,0.25)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              padding: '8px 10px',
+              flexDirection: 'column',
+              gap: '5px',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
+            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+            <div style={{ width: '22px', height: '2px', backgroundColor: '#FFFFFF', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
+          </button>
         </div>
       </div>
 
@@ -365,6 +344,35 @@ export default function Navbar() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        .nav-inner {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .nav-logo-container { gap: 11px; }
+        .nav-armoirie { width: 56px; height: 56px; }
+        .nav-logo-img { width: 62px; height: 62px; }
+        .nav-text-line { font-size: 11px; letter-spacing: 2px; }
+        .nav-flag-bar { height: 3px; margin: 4px 0; }
+        .nav-desktop-menu { display: flex; align-items: center; gap: 2px; }
+        .nav-desktop-don { display: inline-flex !important; }
+        .nav-burger { display: none; }
+
+        @media (max-width: 1023px) {
+          .nav-inner { padding: 0 16px; }
+          .nav-logo-container { gap: 7px; }
+          .nav-armoirie { width: 34px; height: 34px; }
+          .nav-logo-img { width: 34px; height: 34px; }
+          .nav-text-line { font-size: 7.5px; letter-spacing: 0.5px; }
+          .nav-flag-bar { height: 2px; margin: 3px 0; }
+          .nav-desktop-menu { display: none !important; }
+          .nav-desktop-don { display: none !important; }
+          .nav-burger { display: flex !important; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+        }
       `}</style>
     </nav>
   )
