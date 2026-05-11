@@ -12,10 +12,15 @@ const redditions = [
     type: "Annuelle",
     presentes_par: "Cabinet du Maire",
     resume: "Présentation du bilan complet de l'exercice budgétaire 2025 devant le conseil communal et la population. Taux d'exécution budgétaire de 87%, 23 projets réalisés et amélioration des indicateurs de développement humain.",
-    document: {
+    rapport: {
       titre: "Rapport de reddition de compte 2025",
       url: "#",
       taille: "2,4 Mo — PDF",
+    },
+    documentReddition: {
+      titre: "Document officiel de reddition de compte 2025",
+      url: "#",
+      taille: "1,1 Mo — PDF",
     },
     photos: [
       { url: "https://images.unsplash.com/photo-1560439514-4e9645039924?w=600&q=80", legende: "Séance de présentation" },
@@ -38,10 +43,15 @@ const redditions = [
     type: "Semestrielle",
     presentes_par: "Direction des Affaires Financières",
     resume: "Bilan d'étape des six premiers mois de l'exercice 2025. Taux d'exécution de 41% au terme du premier semestre, avec 9 projets en cours d'exécution sur les 20 inscrits au budget.",
-    document: {
+    rapport: {
       titre: "Rapport semestriel S1 2025",
       url: "#",
       taille: "1,8 Mo — PDF",
+    },
+    documentReddition: {
+      titre: "Document officiel de reddition de compte S1 2025",
+      url: "#",
+      taille: "820 Ko — PDF",
     },
     photos: [
       { url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80", legende: "Présentation du rapport" },
@@ -63,10 +73,15 @@ const redditions = [
     type: "Annuelle",
     presentes_par: "Cabinet du Maire",
     resume: "Clôture de l'exercice 2024 avec un taux d'exécution budgétaire de 82%. Focus sur les réalisations dans les secteurs de l'éducation, la santé et les infrastructures rurales.",
-    document: {
+    rapport: {
       titre: "Rapport de reddition de compte 2024",
       url: "#",
       taille: "3,1 Mo — PDF",
+    },
+    documentReddition: {
+      titre: "Document officiel de reddition de compte 2024",
+      url: "#",
+      taille: "1,4 Mo — PDF",
     },
     photos: [
       { url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80", legende: "Session de reddition" },
@@ -192,20 +207,35 @@ export default function RedditionDeComptePage() {
                     Présenté par : {r.presentes_par}
                   </p>
                 </div>
-                {/* Bouton téléchargement */}
-                <a
-                  href={r.document.url}
-                  download
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    backgroundColor: '#C9A84C', color: '#0A3D2E',
-                    fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700',
-                    padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
-                    whiteSpace: 'nowrap', flexShrink: 0,
-                  }}
-                >
-                  ⬇ Télécharger le rapport
-                </a>
+                {/* Boutons téléchargement */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
+                  <a
+                    href={r.rapport.url}
+                    download
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      backgroundColor: '#C9A84C', color: '#0A3D2E',
+                      fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700',
+                      padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    ⬇ Télécharger le rapport
+                  </a>
+                  <a
+                    href={r.documentReddition.url}
+                    download
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '8px',
+                      backgroundColor: 'rgba(201,168,76,0.18)', color: '#C9A84C',
+                      fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700',
+                      padding: '10px 20px', borderRadius: '8px', textDecoration: 'none',
+                      whiteSpace: 'nowrap', border: '1px solid rgba(201,168,76,0.4)',
+                    }}
+                  >
+                    ⬇ Document de reddition
+                  </a>
+                </div>
               </div>
 
               {/* Corps */}
@@ -229,30 +259,41 @@ export default function RedditionDeComptePage() {
                   ))}
                 </div>
 
-                {/* Document + Photos */}
+                {/* Documents + Photos */}
                 <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px' }}>
 
-                  {/* Document */}
-                  <div style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '20px', border: '1px solid #E8E4DC', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <div style={{ width: '48px', height: '48px', backgroundColor: '#0A3D2E', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', flexShrink: 0 }}>
-                      📄
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '700', color: '#0A3D2E', marginBottom: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {r.document.titre}
+                  {/* Deux fichiers */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {[
+                      { ...r.rapport, label: 'Rapport' },
+                      { ...r.documentReddition, label: 'Document de reddition' },
+                    ].map((fichier, idx) => (
+                      <div key={idx} style={{ backgroundColor: '#F8F6F1', borderRadius: '12px', padding: '16px 20px', border: '1px solid #E8E4DC', display: 'flex', alignItems: 'center', gap: '14px' }}>
+                        <div style={{ width: '44px', height: '44px', backgroundColor: '#0A3D2E', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0 }}>
+                          📄
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#C9A84C', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '2px' }}>
+                            {fichier.label}
+                          </div>
+                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '13px', fontWeight: '600', color: '#0A3D2E', marginBottom: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {fichier.titre}
+                          </div>
+                          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#9A9A9A' }}>
+                            {fichier.taille}
+                          </div>
+                        </div>
+                        <a href={fichier.url} download style={{
+                          display: 'inline-flex', alignItems: 'center', gap: '5px',
+                          backgroundColor: '#0A3D2E', color: '#FFFFFF',
+                          fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600',
+                          padding: '7px 12px', borderRadius: '6px', textDecoration: 'none',
+                          flexShrink: 0,
+                        }}>
+                          ⬇
+                        </a>
                       </div>
-                      <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#9A9A9A', marginBottom: '12px' }}>
-                        {r.document.taille}
-                      </div>
-                      <a href={r.document.url} download style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '6px',
-                        backgroundColor: '#0A3D2E', color: '#FFFFFF',
-                        fontFamily: 'Outfit, sans-serif', fontSize: '12px', fontWeight: '600',
-                        padding: '7px 14px', borderRadius: '6px', textDecoration: 'none',
-                      }}>
-                        ⬇ Télécharger
-                      </a>
-                    </div>
+                    ))}
                   </div>
 
                   {/* Photos */}
