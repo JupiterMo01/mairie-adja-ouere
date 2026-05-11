@@ -227,13 +227,13 @@ export default function Navbar() {
               style={{ width: isMobile ? '34px' : '56px', height: isMobile ? '34px' : '56px', objectFit: 'contain', flexShrink: 0 }}
             />
             {/* Bloc texte */}
-            <div>
+            <div style={{ whiteSpace: 'nowrap' }}>
               <div style={{
                 fontFamily: 'Outfit, sans-serif',
                 fontSize: isMobile ? '7.5px' : '11px',
                 fontWeight: '700',
                 color: '#FFFFFF',
-                letterSpacing: isMobile ? '0.8px' : '2px',
+                letterSpacing: isMobile ? '0.5px' : '2px',
                 textTransform: 'uppercase',
                 lineHeight: 1.3,
               }}>
@@ -249,7 +249,7 @@ export default function Navbar() {
                 fontSize: isMobile ? '7.5px' : '11px',
                 fontWeight: '700',
                 color: '#FFFFFF',
-                letterSpacing: isMobile ? '0.8px' : '2px',
+                letterSpacing: isMobile ? '0.5px' : '2px',
                 textTransform: 'uppercase',
                 lineHeight: 1.3,
               }}>

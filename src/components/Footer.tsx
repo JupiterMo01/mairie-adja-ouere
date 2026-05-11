@@ -188,39 +188,39 @@ export default function Footer() {
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
+              gap: isMobile ? '8px' : '12px',
               marginBottom: '20px',
             }}>
               {/* Armoirie */}
               <img
                 src="/armoirie.png"
                 alt="Armoirie du Bénin"
-                style={{ width: '64px', height: '64px', objectFit: 'contain', flexShrink: 0 }}
+                style={{ width: isMobile ? '44px' : '64px', height: isMobile ? '44px' : '64px', objectFit: 'contain', flexShrink: 0 }}
               />
               {/* Bloc texte */}
-              <div>
+              <div style={{ whiteSpace: 'nowrap' }}>
                 <div style={{
                   fontFamily: 'Outfit, sans-serif',
-                  fontSize: '12px',
+                  fontSize: isMobile ? '9px' : '12px',
                   fontWeight: '700',
                   color: '#FFFFFF',
-                  letterSpacing: '2px',
+                  letterSpacing: isMobile ? '0.5px' : '2px',
                   textTransform: 'uppercase',
                   lineHeight: 1.3,
                 }}>
                   République du Bénin
                 </div>
-                <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: '5px 0' }}>
+                <div style={{ display: 'flex', height: '3px', borderRadius: '2px', overflow: 'hidden', margin: isMobile ? '3px 0' : '5px 0' }}>
                   <div style={{ flex: 1, backgroundColor: '#008751' }} />
                   <div style={{ flex: 1, backgroundColor: '#FCD116' }} />
                   <div style={{ flex: 1, backgroundColor: '#E8112D' }} />
                 </div>
                 <div style={{
                   fontFamily: 'Outfit, sans-serif',
-                  fontSize: '12px',
+                  fontSize: isMobile ? '9px' : '12px',
                   fontWeight: '700',
                   color: '#FFFFFF',
-                  letterSpacing: '2px',
+                  letterSpacing: isMobile ? '0.5px' : '2px',
                   textTransform: 'uppercase',
                   lineHeight: 1.3,
                 }}>
@@ -231,7 +231,7 @@ export default function Footer() {
               <img
                 src="/logo.jpeg"
                 alt="Logo Commune d'Adja-Ouèrè"
-                style={{ width: '72px', height: '72px', objectFit: 'contain', flexShrink: 0 }}
+                style={{ width: isMobile ? '40px' : '72px', height: isMobile ? '40px' : '72px', objectFit: 'contain', flexShrink: 0 }}
               />
             </div>
 
