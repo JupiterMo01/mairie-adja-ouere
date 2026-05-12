@@ -172,6 +172,7 @@ export default function DemandeManifestion() {
       setMontantPaye(montant)
       setSubmitted(true)
       setLoading(false)
+      window.scrollTo(0, 0)
       return
     }
 
@@ -214,6 +215,7 @@ export default function DemandeManifestion() {
         if (obj.transaction?.status === 'approved') {
           setMontantPaye(montant)
           setSubmitted(true)
+          window.scrollTo(0, 0)
         } else {
           setPaymentError('Le paiement a echoue ou a ete annule. Veuillez reessayer.')
         }

@@ -101,6 +101,7 @@ export default function DemandeStage() {
     await new Promise(r => setTimeout(r, 1500))
     setSubmitted(true)
     setLoading(false)
+    window.scrollTo(0, 0)
   }
 
   const inputStyle = (error?: string): React.CSSProperties => ({
