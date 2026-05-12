@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 
 export default function SectionContact() {
   const [form, setForm] = React.useState({
@@ -15,15 +16,8 @@ export default function SectionContact() {
   const [submitted, setSubmitted] = React.useState(false)
   const [btnHovered, setBtnHovered] = React.useState(false)
   const [dragOver, setDragOver] = React.useState(false)
-  const [isMobile, setIsMobile] = React.useState(false)
+  const isMobile = useIsMobile(1024)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
-
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })

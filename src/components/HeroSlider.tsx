@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 import Link from 'next/link'
 import { actualites as toutesActualites } from '@/app/publications/actualites/page'
 
@@ -19,14 +20,7 @@ const slides = toutesActualites.slice(0, 5)
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
   const [animating, setAnimating] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
+  const isMobile = useIsMobile()
 
   const goToNext = () => {
     if (animating || slides.length === 0) return

@@ -1,6 +1,8 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 
 export default function SectionNewsletter() {
   const [email, setEmail] = React.useState('')
@@ -9,14 +11,7 @@ export default function SectionNewsletter() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
   const [btnHovered, setBtnHovered] = React.useState(false)
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
+  const isMobile = useIsMobile()
 
   const isValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && nom.trim().length > 0
 
@@ -90,7 +85,8 @@ export default function SectionNewsletter() {
               Vous êtes maintenant abonné à la newsletter de la Commune d&apos;Adja-Ouèrè. Vérifiez votre boîte mail pour l&apos;email de confirmation.
             </p>
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: 0 }}>
-              Vous pourrez vous désabonner à tout moment via le lien dans nos emails.
+              Vous pourrez vous désabonner à tout moment —{' '}
+              <Link href="/se-desabonner" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>Se désabonner</Link>
             </p>
           </div>
         ) : (
@@ -138,7 +134,8 @@ export default function SectionNewsletter() {
             </button>
 
             <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: 0 }}>
-              Pas de spam. Vous pouvez vous désabonner à tout moment via le lien dans nos emails.
+              Pas de spam.{' '}
+              <Link href="/se-desabonner" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>Se désabonner</Link>
             </p>
           </div>
         )}

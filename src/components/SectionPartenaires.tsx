@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 
 const partenaires = [
   {
@@ -119,14 +120,7 @@ function PartenaireCard({ p }: { p: typeof partenaires[0] }) {
 }
 
 export default function SectionPartenaires() {
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
+  const isMobile = useIsMobile()
 
   return (
     <section style={{ backgroundColor: '#FFFFFF', padding: isMobile ? '60px 24px' : '80px 40px', borderTop: '1px solid #E8E4DC' }}>

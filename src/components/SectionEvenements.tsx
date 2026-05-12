@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { evenements as tousEvenements } from '@/app/publications/evenements/page'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 
 const today = new Date()
 const evenements = tousEvenements
@@ -87,20 +88,10 @@ function Modal({ evt, onClose }: { evt: Evenement; onClose: () => void }) {
   React.useEffect(() => {
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handleKey)
-    const scrollY = window.scrollY
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleKey)
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
       document.body.style.overflow = ''
-      window.scrollTo(0, scrollY)
     }
   }, [onClose])
 
@@ -199,14 +190,7 @@ function EventCard({ evt, onOpen, animDelay, isMobile }: { evt: Evenement; onOpe
 
 export default function SectionEvenements() {
   const [modalEvt, setModalEvt] = React.useState<Evenement | null>(null)
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
+  const isMobile = useIsMobile()
 
   return (
     <section style={{ backgroundColor: '#F8F6F1', padding: '80px 40px' }}>

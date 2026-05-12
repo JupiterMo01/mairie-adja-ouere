@@ -1,19 +1,13 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { useIsMobile } from '@/src/hooks/useIsMobile'
 
 export default function MotMaire() {
   const [expanded, setExpanded] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const isMobile = useIsMobile(1024)
   const [inView, setInView] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
