@@ -3,6 +3,16 @@
 html {
   overflow-x: clip; /* clip ne crée pas de scroll container, ne casse pas position:sticky */
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #C9A84C;
+  outline-offset: 2px;
+}
 body {
   overflow-x: clip;
   max-width: 100%;
