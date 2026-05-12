@@ -93,6 +93,7 @@ export default function SectionContact() {
     border: '1px solid #E8E4DC',
     borderRadius: '8px',
     outline: 'none',
+    boxShadow: 'none',
     transition: 'border 0.2s ease',
     boxSizing: 'border-box' as const,
   }

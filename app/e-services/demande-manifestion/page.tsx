@@ -227,7 +227,7 @@ export default function DemandeManifestion() {
     width: '100%', padding: '11px 14px',
     fontFamily: 'Outfit, sans-serif', fontSize: '14px',
     border: `1px solid ${error ? '#D32F2F' : '#E8E4DC'}`,
-    borderRadius: '8px', outline: 'none',
+    borderRadius: '8px', outline: 'none', boxShadow: 'none',
     backgroundColor: '#FFFFFF', color: '#1C1C1C',
     boxSizing: 'border-box', transition: 'border-color 0.2s ease',
   })
