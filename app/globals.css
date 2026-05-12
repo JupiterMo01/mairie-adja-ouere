@@ -4,9 +4,13 @@ html {
   overflow-x: clip; /* clip ne crée pas de scroll container, ne casse pas position:sticky */
 }
 
-* {
+*,
+*:focus,
+*:focus-visible,
+*:active {
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  -webkit-touch-callout: none;
 }
 body {
   overflow-x: clip;
