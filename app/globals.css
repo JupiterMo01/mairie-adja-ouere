@@ -12,6 +12,19 @@ html {
   outline: none;
   -webkit-touch-callout: none;
 }
+
+input, textarea, select, button, a {
+  outline: none;
+}
+
+input:focus, input:focus-visible,
+textarea:focus, textarea:focus-visible,
+select:focus, select:focus-visible,
+button:focus, button:focus-visible,
+a:focus, a:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 body {
   overflow-x: clip;
   max-width: 100%;
