@@ -100,12 +100,22 @@ const sections = [
 
 export default function PolitiqueCookiesPage() {
   const [isMobile, setIsMobile] = React.useState(false)
+  const [activeSection, setActiveSection] = React.useState(sections[0].id)
 
   React.useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
+  }, [])
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => { entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) }) },
+      { rootMargin: '-20% 0px -60% 0px' }
+    )
+    sections.forEach(sec => { const el = document.getElementById(sec.id); if (el) observer.observe(el) })
+    return () => observer.disconnect()
   }, [])
 
   const textStyle: React.CSSProperties = {
@@ -141,7 +151,40 @@ export default function PolitiqueCookiesPage() {
 
       {/* Contenu */}
       <section style={{ padding: isMobile ? '40px 24px' : '60px 40px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '260px 1fr', gap: '48px', alignItems: 'start' }}>
+
+          {/* Sommaire — sidebar */}
+          {!isMobile && (<div style={{ position: 'sticky', top: '108px' }}>
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '20px', overflow: 'hidden' }}>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
+                Sommaire
+              </div>
+              {sections.map(sec => (
+                <a key={sec.id} href={`#${sec.id}`} style={{
+                  display: 'block', padding: '9px 10px 9px 12px', borderRadius: '8px', marginBottom: '4px', textDecoration: 'none',
+                  backgroundColor: activeSection === sec.id ? 'rgba(10,61,46,0.07)' : 'transparent',
+                  borderLeft: `3px solid ${activeSection === sec.id ? '#C9A84C' : 'transparent'}`,
+                  fontFamily: 'Outfit, sans-serif', fontSize: '13px',
+                  fontWeight: activeSection === sec.id ? '700' : '400',
+                  color: activeSection === sec.id ? '#0A3D2E' : '#6A6A6A',
+                  transition: 'all 0.2s ease',
+                }}>
+                  {sec.titre}
+                </a>
+              ))}
+            </div>
+            <div style={{ marginTop: '16px', backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid #E8E4DC', padding: '20px' }}>
+              <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', fontWeight: '700', color: '#9A9A9A', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '16px' }}>
+                Voir aussi
+              </div>
+              <Link href="/mentions-legales" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500', marginBottom: '10px' }}>
+                Mentions légales →
+              </Link>
+              <Link href="/politique-confidentialite" style={{ display: 'block', fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: '#156840', textDecoration: 'none', fontWeight: '500' }}>
+                Politique de confidentialité →
+              </Link>
+            </div>
+          </div>)}
 
           {/* Corps du document */}
           <div>

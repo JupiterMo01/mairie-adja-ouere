@@ -64,6 +64,7 @@ nav[aria-label="Fil d'Ariane"] { padding: 10px 40px; }
 
 @media (max-width: 1023px) {
   .page-sidebar-grid { grid-template-columns: 1fr; gap: 0; }
+  .page-sidebar-col { display: none !important; }
 }
 
 /* Grille page détail actualités */

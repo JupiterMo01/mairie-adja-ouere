@@ -121,6 +121,15 @@ export default function FAQPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => { entries.forEach(e => { if (e.isIntersecting) setActiveCategory(e.target.id) }) },
+      { rootMargin: '-20% 0px -60% 0px' }
+    )
+    categories.forEach(cat => { const el = document.getElementById(cat.id); if (el) observer.observe(el) })
+    return () => observer.disconnect()
+  }, [])
+
   const toggle = (key: string) => setOpenQuestion(prev => prev === key ? null : key)
 
   return (
