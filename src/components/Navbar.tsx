@@ -206,7 +206,7 @@ export default function Navbar() {
     }}>
       <div className="nav-inner">
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+        <Link href="/" style={{ textDecoration: 'none', flexShrink: 0, outline: 'none' }}>
           <div className="nav-logo-container" style={{ display: 'flex', alignItems: 'center' }}>
             <img
               src="/armoirie.png"
@@ -353,6 +353,11 @@ export default function Navbar() {
           align-items: center;
           justify-content: space-between;
         }
+        * { -webkit-tap-highlight-color: transparent !important; }
+        a, button, input, textarea, select { outline: none !important; box-shadow: none !important; }
+        a:focus, a:focus-visible, a:active,
+        button:focus, button:focus-visible, button:active { outline: none !important; box-shadow: none !important; }
+
         .nav-logo-container { gap: 11px; }
         .nav-armoirie { width: 56px; height: 56px; }
         .nav-logo-img { width: 62px; height: 62px; }
