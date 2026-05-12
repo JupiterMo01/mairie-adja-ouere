@@ -181,7 +181,7 @@ function Lightbox({
     <div
       onClick={onClose}
       style={{
-        position: 'fixed', inset: 0, zIndex: 2000,
+        position: 'fixed', inset: 0, zIndex: 100000,
         backgroundColor: 'rgba(0,0,0,0.95)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '20px',
@@ -194,14 +194,14 @@ function Lightbox({
         backgroundColor: 'rgba(255,255,255,0.15)', border: 'none',
         cursor: 'pointer', color: '#FFFFFF', fontSize: '22px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 2001,
+        zIndex: 100001,
       }}>×</button>
 
       {/* Compteur */}
       <div style={{
         position: 'fixed', top: '24px', left: '50%', transform: 'translateX(-50%)',
         fontFamily: 'Outfit, sans-serif', fontSize: '13px', color: 'rgba(255,255,255,0.6)',
-        zIndex: 2001, textAlign: 'center',
+        zIndex: 100001, textAlign: 'center',
       }}>
         <div>{albumTitre}</div>
         <div style={{ marginTop: '4px' }}>{indexActif + 1} / {photos.length}</div>
@@ -216,7 +216,7 @@ function Lightbox({
           backgroundColor: 'rgba(255,255,255,0.15)', border: 'none',
           cursor: 'pointer', color: '#FFFFFF', fontSize: '24px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          zIndex: 2001,
+          zIndex: 100001,
         }}
       >‹</button>
 
@@ -229,7 +229,7 @@ function Lightbox({
           backgroundColor: 'rgba(255,255,255,0.15)', border: 'none',
           cursor: 'pointer', color: '#FFFFFF', fontSize: '24px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          zIndex: 2001,
+          zIndex: 100001,
         }}
       >›</button>
 
@@ -307,7 +307,7 @@ function AlbumModal({
       <div
         onClick={onClose}
         style={{
-          position: 'fixed', inset: 0, zIndex: 1000,
+          position: 'fixed', inset: 0, zIndex: 99999,
           backgroundColor: 'rgba(10,61,46,0.6)',
           backdropFilter: 'blur(4px)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
